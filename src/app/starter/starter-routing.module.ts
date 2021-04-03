@@ -2,6 +2,7 @@ import { ContentComponent } from './starter/content/content.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StarterComponent } from './starter/starter.component';
+import { UsuarioComponent } from './pages/usuario/usuario.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: '',
         component: ContentComponent
+      },
+      {
+        path:'users',
+        component : UsuarioComponent
       }
     ]
   }
