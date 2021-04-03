@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,6 +7,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AgGridModule.withComponents([])
   ],
   providers: [
     {
@@ -25,6 +27,9 @@ import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
       useClass: AuthInterceptor,
       multi: true,
     },
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   bootstrap: [AppComponent]
 })
