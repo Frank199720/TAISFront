@@ -1,9 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminComponent } from './admin.component';
+import { UsuarioComponent } from './pages/usuario/usuario.component';
 
 
 const routes: Routes = [
-  {path:'dashboard'}
+  {path: '',
+  component: AdminComponent,
+  children: [
+    {
+      path: '',
+      component: UsuarioComponent
+    },
+    
+  ]}
 ];
 
 @NgModule({

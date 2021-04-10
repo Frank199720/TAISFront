@@ -5,13 +5,13 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 
 
 @Component({
-  selector: 'app-button-renderer',
+  selector: 'app-button-delete',
   template: `
-    <button type="button" class="btn btn-warning btn-sm" (click)="onClick($event)"><i class="fas fa-edit"></i></button>
+    <button type="button" class="btn btn-danger btn-sm" (click)="onClick($event)"><i class="fas fa-trash"></i></button>
     `
 })
 
-export class ButtonRendererComponent implements ICellRendererAngularComp {
+export class ButtonDeleteComponent implements ICellRendererAngularComp {
 
   params;
   label: string;

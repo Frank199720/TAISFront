@@ -8,9 +8,11 @@ import { ControlSideBarComponent } from "./starter/control-side-bar/control-side
 import { MainSideBarComponent } from "./starter/main-side-bar/main-side-bar.component";
 import { NavBarComponent } from "./starter/nav-bar/nav-bar.component";
 import { FooterComponent } from "./starter/footer/footer.component";
-import { UsuarioComponent } from "./pages/usuario/usuario.component";
+
 import { AgGridModule } from "ag-grid-angular";
 import { ButtonRendererComponent } from "../rendered/button-renderer.component";
+import { ButtonDeleteComponent } from '../rendered/button-delete.component';
+
 
 @NgModule({
   declarations: [
@@ -20,13 +22,13 @@ import { ButtonRendererComponent } from "../rendered/button-renderer.component";
     MainSideBarComponent,
     NavBarComponent,
     FooterComponent,
-    UsuarioComponent,
-    ButtonRendererComponent
+    
+    
   ],
   imports: [
     CommonModule,
     StarterRoutingModule,
-    AgGridModule.withComponents([ButtonRendererComponent]),
+    AgGridModule.withComponents([ButtonRendererComponent,ButtonDeleteComponent]),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
