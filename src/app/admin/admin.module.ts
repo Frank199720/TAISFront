@@ -11,6 +11,8 @@ import { ButtonDeleteComponent } from "../rendered/button-delete.component";
 import { UsuarioComponent } from "../admin/pages/usuario/usuario.component";
 import { AdminComponent } from './admin.component';
 import { ModalUsuarioComponent } from './modals/modal-usuario/modal-usuario.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ModalUsuarioComponent } from './modals/modal-usuario/modal-usuario.comp
   imports: [
     CommonModule,
     AdminRoutingModule,
+    FormsModule,
     AgGridModule.withComponents([
       ButtonRendererComponent,
       ButtonDeleteComponent,

@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { ButtonRendererComponent } from "../../../rendered/button-renderer.component";
 import { ButtonDeleteComponent } from "../../../rendered/button-delete.component";
-
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+import { Usuario } from '../../../interfaces/usuario';
 @Component({
   selector: "app-usuario",
   templateUrl: "./usuario.component.html",
@@ -9,7 +10,14 @@ import { ButtonDeleteComponent } from "../../../rendered/button-delete.component
 })
 export class UsuarioComponent implements OnInit {
   frameworkComponents: any;
-  constructor() {
+  @ViewChild("contenido") myModal: ElementRef;
+  usuario:Usuario={
+    nombre:'Frank',
+    apellido:'De La Cruz',
+    username:'nel',
+    password:'nel'
+  }
+  constructor(private modal:NgbModal) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       buttonRenderer2: ButtonDeleteComponent,
@@ -64,6 +72,11 @@ export class UsuarioComponent implements OnInit {
   }
   onBtnClick1(e) {
     this.rowDataClicked1 = e.rowData;
+    this.modal.open(this.myModal);
     console.log(this.rowDataClicked1);
+  }
+  receptUser(user:Usuario){
+    console.log(user);
+    this.modal.dismissAll();
   }
 }

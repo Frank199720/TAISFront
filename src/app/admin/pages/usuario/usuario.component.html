@@ -1,4 +1,6 @@
-
+<ng-template #contenido let-modal>
+  <app-modal-usuario [usuario]="usuario" (userOut)="receptUser( $event)"></app-modal-usuario>
+</ng-template>
 
 <div class="content-header">
   <div class="container-fluid">

@@ -4,11 +4,12 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
-  
+
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,9 @@ import { AgGridModule } from 'ag-grid-angular';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    NgbModule,
+    FormsModule
   ],
   providers: [
     {
