@@ -13,7 +13,8 @@ import { AdminComponent } from './admin.component';
 import { ModalUsuarioComponent } from './modals/modal-usuario/modal-usuario.component';
 import { FormsModule } from '@angular/forms';
 import { ModalEmpresaComponent } from './modals/modal-empresa/modal-empresa.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,8 @@ import { ModalEmpresaComponent } from './modals/modal-empresa/modal-empresa.comp
     CommonModule,
     AdminRoutingModule,
     FormsModule,
+    MaterialModule,
+    ReactiveFormsModule,
     AgGridModule.withComponents([
       ButtonRendererComponent,
       ButtonDeleteComponent,

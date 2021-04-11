@@ -72,7 +72,7 @@ export class UsuarioComponent implements OnInit {
   }
   onBtnClick1(e) {
     this.rowDataClicked1 = e.rowData;
-    this.modal.open(this.myModal);
+    this.modal.open(this.myModal,{size:'lg'});
     console.log(this.rowDataClicked1);
   }
   receptUser(user:Usuario){
