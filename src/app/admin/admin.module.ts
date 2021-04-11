@@ -12,6 +12,7 @@ import { UsuarioComponent } from "../admin/pages/usuario/usuario.component";
 import { AdminComponent } from './admin.component';
 import { ModalUsuarioComponent } from './modals/modal-usuario/modal-usuario.component';
 import { FormsModule } from '@angular/forms';
+import { ModalEmpresaComponent } from './modals/modal-empresa/modal-empresa.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     AdminComponent,
     ButtonRendererComponent,
     ButtonDeleteComponent,
-    ModalUsuarioComponent
+    ModalUsuarioComponent,
+    ModalEmpresaComponent
   ],
   imports: [
     CommonModule,
