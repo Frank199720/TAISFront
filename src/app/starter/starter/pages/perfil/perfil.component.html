@@ -1,0 +1,114 @@
+<ng-template #contenido let-modal>
+   <app-modal-contrasenia></app-modal-contrasenia>
+</ng-template>
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">MI PERFIL</h1>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Perfil</li>
+        </ol>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+</div>
+<div class="content">
+  <div class="row m-0 justify-content-center">
+    <div class="col-11">
+      <form [formGroup]="formPerfil">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>DATOS GENERALES</mat-card-title>
+            <button class="btn btn-outline-warning ml-auto" (click)="isEdit=true">
+              Editar <i class="fa fa-edit fa-sm"></i>
+            </button>
+          </mat-card-header>
+          <mat-card-body>
+            <mat-form-field class="example-full-width col-3">
+              <mat-label>DNI</mat-label>
+              <input
+                matInput
+                readonly
+                formControlName="dni"
+                [(ngModel)]="usuario.dni"
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width col-9">
+              <mat-label>NOMBRES</mat-label>
+              <input
+                matInput
+                readonly
+                formControlName="nombres"
+                [(ngModel)]="usuario.nombre"
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width col-6">
+              <mat-label>APELLIDO PATERNO</mat-label>
+              <input
+                matInput
+                formControlName="apellidos"
+                readonly
+                [(ngModel)]="usuario.apellido_paterno"
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width col-6">
+              <mat-label>APELLIDO MATERNO</mat-label>
+              <input
+                matInput
+                formControlName="apellidos"
+                readonly
+                [(ngModel)]="usuario.apellido_materno"
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width col-12">
+              <mat-label>DIRECCION</mat-label>
+              <input
+                matInput
+                formControlName="direccion"
+                [(ngModel)]="usuario.direccion"
+                [readonly]="!isEdit?'true':'false'"
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width col-6">
+              <mat-label>CORREO</mat-label>
+              <input
+                matInput
+                formControlName="correo"
+                [(ngModel)]="usuario.correo"
+                [readonly]="!isEdit?'true':'false'"
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width col-6">
+              <mat-label>CELULAR</mat-label>
+              <input
+                matInput
+                formControlName="celular"
+              
+                [readonly]="!isEdit?'true':'false'"q
+                [(ngModel)]="usuario.celular"
+              />
+            </mat-form-field>
+            <div class="row m-0 justify-content-center">
+              <div class="col-5">
+                <button class="btn btn-outline-danger m-1" (click)="isEdit=false">Cancelar</button>
+                <button class="btn btn-outline-primary m-1">
+                  Actualizar Datos
+                </button>
+                <button class="btn btn-outline-success m-1" (click)="changePassword()">
+                  Cambiar contraseña
+                </button>
+              </div>
+            </div>
+          </mat-card-body>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+</div>

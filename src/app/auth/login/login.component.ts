@@ -13,9 +13,17 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router,private authService:AuthService) { }
   user:Usuario={
     nombre:'Diana',
-    apellido:'Sifuentes',
+    apellido_materno:'Sifuentes',
+    apellido_paterno:'Sifuentes',
     username:'diana@gmail.com',
-    password:'1234'
+    password:'1234',
+    direccion:null,
+    celular:null,
+    correo:null,
+    id:null,
+    rol:null,
+    dni:null,
+    ruc:null
   }
   ngOnInit(): void {
   }

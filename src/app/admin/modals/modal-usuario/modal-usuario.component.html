@@ -15,9 +15,14 @@
           <input matInput formControlName="nombres" [(ngModel)]="usuario.nombre">
             <mat-error *ngIf="dni.hasError('required')">Ingrese los nombres</mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width col-12">
-          <mat-label>APELLIDOS</mat-label>
-          <input matInput formControlName="apellidos" [(ngModel)]="usuario.apellido">
+        <mat-form-field class="example-full-width col-6">
+          <mat-label>APELLIDO PATERNO</mat-label>
+          <input matInput formControlName="apellidos" [(ngModel)]="usuario.apellido_paterno">
+            <mat-error *ngIf="apellidos.hasError('required')">Ingrese los apellidos</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-6">
+          <mat-label>APELLIDO MATERNO</mat-label>
+          <input matInput formControlName="apellidos" [(ngModel)]="usuario.apellido_paterno">
             <mat-error *ngIf="apellidos.hasError('required')">Ingrese los apellidos</mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width col-12">

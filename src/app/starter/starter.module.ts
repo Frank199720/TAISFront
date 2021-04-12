@@ -11,8 +11,13 @@ import { FooterComponent } from "./starter/footer/footer.component";
 
 import { AgGridModule } from "ag-grid-angular";
 import { ButtonRendererComponent } from "../rendered/button-renderer.component";
-import { ButtonDeleteComponent } from '../rendered/button-delete.component';
-
+import { ButtonDeleteComponent } from "../rendered/button-delete.component";
+import { ProcesoComponent } from "./starter/pages/proceso/proceso.component";
+import { PerfilComponent } from "./starter/pages/perfil/perfil.component";
+import { MaterialModule } from "../admin/material/material.module";
+import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
+import { ModalContraseniaComponent } from "./starter/modals/modal-contrasenia/modal-contrasenia.component";
 
 @NgModule({
   declarations: [
@@ -22,13 +27,21 @@ import { ButtonDeleteComponent } from '../rendered/button-delete.component';
     MainSideBarComponent,
     NavBarComponent,
     FooterComponent,
-    
-    
+    ProcesoComponent,
+    PerfilComponent,
+    ModalContraseniaComponent,
   ],
   imports: [
     CommonModule,
+    
+    FormsModule,
+    ReactiveFormsModule,
     StarterRoutingModule,
-    AgGridModule.withComponents([ButtonRendererComponent,ButtonDeleteComponent]),
+    MaterialModule,
+    AgGridModule.withComponents([
+      ButtonRendererComponent,
+      ButtonDeleteComponent,
+    ]),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

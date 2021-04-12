@@ -31,19 +31,7 @@
              with font-awesome or any other icon font library -->
 
         <li class="nav-item">
-          <a href="#" class="nav-link"  [routerLink]="['users']">
-            <i class="nav-icon fas fa-users"></i>
-            <p>Usuarios</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-business-time"></i>
-            <p>Empresas</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a [routerLink]="['perfil']" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
             <p>Perfil</p>
           </a>
@@ -57,7 +45,7 @@
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-tasks"></i>
-           
+
             <p>
               Gestión de procesos
               <i class="right fas fa-angle-left"></i>
@@ -65,7 +53,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a [routerLink]="['procesos']" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Procesos</p>
               </a>

@@ -84,7 +84,7 @@ export class EmpresaComponent implements OnInit {
   editCompany() {}
   deleteCompany() {}
   activeCompany() {}
-  receptCompany(){
+  receptCompany(empresa:Company){
 
   }
 }

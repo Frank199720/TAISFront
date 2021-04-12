@@ -17,7 +17,8 @@ export class UsuarioComponent implements OnInit {
   private isEdit:boolean=false;
   usuario:Usuario={
     nombre:null,
-    apellido:null,
+    apellido_materno:null,
+    apellido_paterno:null,
     username:null,
     password:null,
     ruc:null,

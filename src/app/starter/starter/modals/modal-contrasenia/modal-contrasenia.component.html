@@ -1,0 +1,35 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Cambio de contraseña</h5>
+    </div>
+    <div class="modal-body">
+      <mat-card-content>
+        <form [formGroup]="formUpdate">
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>Ingrese contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="anterior" [(ngModel)]="update.anterior">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="anterior.hasError('required')">Ingrese su contraseña</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>Ingrese nueva contraseña</mat-label>
+            <input matInput [type]="hide2 ? 'password' : 'text'"  formControlName="nueva" [(ngModel)]="update.nueva">
+            <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-error *ngIf="nueva.hasError('required')">Ingrese la nueva contraseña</mat-error>
+          </mat-form-field>
+         
+
+         
+        </form>
+      </mat-card-content>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-primary">
+        Guardar
+      </button>
+    </div>
+  </div>
+  

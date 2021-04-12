@@ -7,7 +7,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 @Component({
   selector: 'app-button-renderer',
   template: `
-    <button type="button" class="{{class}}" (click)="onClick($event)"><i class="{{icon}}"></i></button>
+    <button type="button" class="{{class}}" (click)="onClick($event)">{{label}}<i class="{{icon}}"></i></button>
     `
 })
 
@@ -16,11 +16,12 @@ export class ButtonRendererComponent implements ICellRendererAngularComp {
   params;
   class: string;
   icon:string;
-
+  label:string;
   agInit(params): void {
     this.params = params;
     this.class = this.params.class || null;
     this.icon = this.params.icon || null;
+    this.label = this.params.label || null;
   }
 
   refresh(params?: any): boolean {
