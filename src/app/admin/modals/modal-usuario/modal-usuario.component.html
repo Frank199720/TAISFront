@@ -1,22 +1,71 @@
-
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Registro Usuario</h5>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="formUsuario">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">DNI</label>
-              <input type="text"  class="form-control" formControlName="dni" [(ngModel)]="usuario.nombre" name="nombre">
-            </div>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Message:</label>
-              <textarea class="form-control" id="message-text" formControlName="dni2" name="apellido" [(ngModel)]="usuario.apellido"></textarea>
-            </div>  
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="sendUser()">Send message</button>
-        </div>
-      </div>
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Registro Usuario</h5>
+  </div>
+  <div class="modal-body">
+    <mat-card-content>
+      <form [formGroup]="formUsuario">
+        <mat-form-field class="example-full-width col-3">
+          <mat-label>DNI</mat-label>
+          <input matInput formControlName="dni" [(ngModel)]="usuario.dni">
+            <mat-error *ngIf="dni.hasError('required')">Ingrese DNI</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-9">
+          <mat-label>NOMBRES</mat-label>
+          <input matInput formControlName="nombres" [(ngModel)]="usuario.nombre">
+            <mat-error *ngIf="dni.hasError('required')">Ingrese los nombres</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-12">
+          <mat-label>APELLIDOS</mat-label>
+          <input matInput formControlName="apellidos" [(ngModel)]="usuario.apellido">
+            <mat-error *ngIf="apellidos.hasError('required')">Ingrese los apellidos</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-12">
+          <mat-label>DIRECCION</mat-label>
+          <input matInput formControlName="direccion" [(ngModel)]="usuario.direccion">
+            <mat-error *ngIf="direccion.hasError('required')">Ingrese la dirección</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-6">
+          <mat-label>CORREO</mat-label>
+          <input matInput type="email" formControlName="correo" [(ngModel)]="usuario.correo">
+         
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-6">
+          <mat-label>CELULAR</mat-label>
+          <input matInput formControlName="celular" [(ngModel)]="usuario.celular">
+            
+        </mat-form-field>
+      
+        <mat-divider></mat-divider>
+        <mat-form-field appearance="fill" class="example-full-width col-6">
+          <mat-label>EMPRESA</mat-label>
+          <select matNativeControl formControlName="empresa">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+          <mat-error *ngIf="empresa.hasError('required')">Seleccione una empresa</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="example-full-width col-6">
+          <mat-label>ROL</mat-label>
+          <select matNativeControl formControlName="rol">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+          <mat-error *ngIf="rol.hasError('required')">Seleccione un rol</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" (click)="sendUser()">
+      Guardar
+    </button>
+  </div>
+</div>

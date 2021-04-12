@@ -10,21 +10,21 @@ export class UsuarioService {
   private route = environment.rutaApi;
   constructor(private httpClient:HttpClient) { }
   public insertUsuario(usuario:Usuario){
-    this.httpClient.post(this.route,usuario);
+    return this.httpClient.post(this.route,usuario);
   }
   public updateUsuario(usuario:Usuario,userId:number){
-    this.httpClient.put(this.route,usuario)
+    return this.httpClient.put(this.route,usuario)
   }
   public inactiveUser(idUser:number){
-    this.httpClient.delete(this.route+idUser)
+    return this.httpClient.delete(this.route+idUser)
   }
   public getUsers(){
-    this.httpClient.get(this.route)
+    return this.httpClient.get(this.route)
   }
   public getUserByID(idUser:number){
-    this.httpClient.get(this.route+idUser)
+    return this.httpClient.get(this.route+idUser)
   }
   public resetPassword(idUser:number){
-    this.httpClient.get(this.route+idUser)
+    return this.httpClient.get(this.route+idUser)
   }
 }

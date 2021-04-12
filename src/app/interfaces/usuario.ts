@@ -3,4 +3,11 @@ export interface Usuario {
     apellido:string;
     username:string;
     password:string;
+    ruc:string;
+    direccion:string,
+    id?:number,
+    correo:string,
+    celular:string,
+    rol:string,
+    dni:string
 }

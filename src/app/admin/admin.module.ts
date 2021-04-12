@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { ModalEmpresaComponent } from './modals/modal-empresa/modal-empresa.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
+import { EmpresaComponent } from './pages/empresa/empresa.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MaterialModule } from './material/material.module';
     ButtonRendererComponent,
     ButtonDeleteComponent,
     ModalUsuarioComponent,
-    ModalEmpresaComponent
+    ModalEmpresaComponent,
+    EmpresaComponent
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,9 @@ import { ButtonRendererComponent } from "../../../rendered/button-renderer.compo
 import { ButtonDeleteComponent } from "../../../rendered/button-delete.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
 import { Usuario } from '../../../interfaces/usuario';
+import { UsuarioService } from "src/app/services/usuario.service";
+import Swal from "sweetalert2";
+import { showConfirm, showError } from "src/app/functions/alerts";
 @Component({
   selector: "app-usuario",
   templateUrl: "./usuario.component.html",
@@ -11,13 +14,21 @@ import { Usuario } from '../../../interfaces/usuario';
 export class UsuarioComponent implements OnInit {
   frameworkComponents: any;
   @ViewChild("contenido") myModal: ElementRef;
+  private isEdit:boolean=false;
   usuario:Usuario={
-    nombre:'Frank',
-    apellido:'De La Cruz',
-    username:'nel',
-    password:'nel'
+    nombre:null,
+    apellido:null,
+    username:null,
+    password:null,
+    ruc:null,
+    direccion:null,
+    id:null,
+    correo:null,
+    celular:null,
+    rol:null,
+    dni:null
   }
-  constructor(private modal:NgbModal) {
+  constructor(private modal:NgbModal,private usuarioService:UsuarioService) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       buttonRenderer2: ButtonDeleteComponent,
@@ -45,17 +56,29 @@ export class UsuarioComponent implements OnInit {
       
       cellRenderer: "buttonRenderer",
       cellRendererParams: {
-        onClick: this.onBtnClick1.bind(this),
-        label: "Editar",
+        onClick: this.editUser.bind(this),
+        class: "btn btn-primary btn-sm",
+        icon:"fas fa-edit"
       },
       width:'70px'
     },
     {
       
-      cellRenderer: "buttonRenderer2",
+      cellRenderer: "buttonRenderer",
       cellRendererParams: {
-        onClick: this.onBtnClick1.bind(this),
-        label: "Eliminar",
+        onClick: this.deleteUser.bind(this),
+        class: "btn btn-danger btn-sm",
+        icon:"far fa-arrow-alt-circle-down"
+      },
+      width:'70px'
+    },
+    {
+      
+      cellRenderer: "buttonRenderer",
+      cellRendererParams: {
+        onClick: this.activeUser.bind(this),
+        class: "btn btn-success btn-sm",
+        icon:"far fa-arrow-alt-circle-up"
       },
       width:'70px'
     },
@@ -70,13 +93,82 @@ export class UsuarioComponent implements OnInit {
   open(value) {
     console.log(value);
   }
-  onBtnClick1(e) {
+  editUser(e) {
     this.rowDataClicked1 = e.rowData;
+    this.isEdit=true;
+    this.usuarioService.getUserByID(2).subscribe((data:Usuario)=>{
+      this.usuario=data;
+      this.modal.open(this.myModal,{size:'lg'});
+    })
+    
     this.modal.open(this.myModal,{size:'lg'});
     console.log(this.rowDataClicked1);
+  }
+  deleteUser(e){
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Este usuario no podrá acceder al sistema",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, de acuerdo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioService.inactiveUser(1).subscribe((data:any
+          )=>{
+          if(data.success){
+
+          }
+        })
+      }
+    })
+  }
+  activeUser(e){
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Este usuario no podrá acceder al sistema",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, de acuerdo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioService.inactiveUser(1).subscribe((data:any
+          )=>{
+          if(data.success){
+
+          }
+        })
+      }
+    })
   }
   receptUser(user:Usuario){
     console.log(user);
     this.modal.dismissAll();
+    if(this.isEdit){
+      this.usuarioService.updateUsuario(user,2).subscribe((data:any)=>{
+        if(data.success){
+          showConfirm('Exito!',data.message);
+        }else{
+          showError('Error',data.message);
+        }
+      })
+    }else{
+      this.usuarioService.insertUsuario(user).subscribe((data:any)=>{
+        if(data.success){
+          showConfirm('Exito!',data.message);
+        }else{
+          showError('Error',data.message);
+        }
+      },
+      (error)=>{
+        console.log(error);
+      })
+    }
+  }
+  agregarUsuario(){
+    this.modal.open(this.myModal,{size:'lg'});
   }
 }

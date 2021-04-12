@@ -1,5 +1,6 @@
 // Author: T4professor
 
+
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 
@@ -16,7 +17,6 @@ export class ButtonRendererComponent implements ICellRendererAngularComp {
   params;
   class: string;
   icon:string;
-
   agInit(params): void {
     this.params = params;
     this.class = this.params.class || null;
