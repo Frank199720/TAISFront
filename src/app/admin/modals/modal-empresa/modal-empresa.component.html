@@ -1,1 +1,57 @@
-<p>modal-empresa works!</p>
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Registro Empresa</h5>
+    </div>
+    <div class="modal-body">
+      <mat-card-content>
+        <form [formGroup]="formEmpresa">
+          <mat-form-field class="example-full-width col-3">
+            <mat-label>RUC</mat-label>
+            <input matInput formControlName="ruc" [(ngModel)]="empresa.ruc">
+              <mat-error *ngIf="ruc.hasError('required')">Ingrese DNI</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-9">
+            <mat-label>RAZÓN SOCIAL</mat-label>
+            <input matInput formControlName="razonSocial" [(ngModel)]="empresa.nombrec">
+              <mat-error *ngIf="razonSocial.hasError('required')">Ingrese los nombres</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-6">
+            <mat-label>GIRO NEGOCIO</mat-label>
+            <input matInput formControlName="giro" [(ngModel)]="empresa.gironegocio">
+              <mat-error *ngIf="giro.hasError('required')">Ingrese los apellidos</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-6">
+            <mat-label>TIPO CONTRIBUYENTE</mat-label>
+            <input matInput formControlName="contribuyente" [(ngModel)]="empresa.contribuyente">
+              <mat-error *ngIf="contribuyente.hasError('required')">Ingrese la dirección</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>DIRECCION</mat-label>
+            <input matInput formControlName="direccion" [(ngModel)]="empresa.direccion">
+           
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-6">
+            <mat-label>EMAIL</mat-label>
+            <input matInput type="email" formControlName="correo" [(ngModel)]="empresa.email">
+              
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-6">
+            <mat-label>TELEFONO</mat-label>
+            <input matInput formControlName="telefono" [(ngModel)]="empresa.telefono">
+              
+          </mat-form-field>
+
+         
+        </form>
+      </mat-card-content>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-primary" (click)="sendCompany()">
+        Guardar
+      </button>
+    </div>
+  </div>
+  
