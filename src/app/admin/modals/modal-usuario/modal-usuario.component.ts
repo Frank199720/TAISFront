@@ -22,7 +22,7 @@ export class ModalUsuarioComponent implements OnInit , AfterContentChecked{
   }
   sendUser(){
     console.log(this.usuario)
-    this.formUsuario.markAllAsTouched;
+    this.formUsuario.markAllAsTouched();
     if(!this.formUsuario.invalid){
       
       this.userOut.emit(this.usuario);

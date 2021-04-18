@@ -1,6 +1,5 @@
-<ng-template #contenido let-modal>
-  
-</ng-template>
+<ng-template #contenido let-modal> </ng-template>
+
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -20,24 +19,65 @@
   </div>
   <!-- /.container-fluid -->
 </div>
+
 <div class="content">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col d-flex">
-        <button class="btn btn-primary ml-auto" (click)="agregarProceso()">
+        <button class="btn btn-danger ml-auto" (click)="addorEdit = false">
+          <i class="fas fa-eye-slash"></i>
+          Ocultar
+        </button>
+        <button
+          class="btn btn-primary ml-1"
+          (click)="agregarProceso(); addorEdit = true"
+        >
           Agregar proceso
         </button>
       </div>
     </div>
-    <div style="width: 100%">
-      <ag-grid-angular
-        style="width: 100%; height: 500px"
-        class="ag-theme-alpine"
-        [rowData]="rowData"
-        [columnDefs]="columnDefs"
-        [frameworkComponents]="frameworkComponents"
-      >
-      </ag-grid-angular>
+    <div class="row"></div>
+    <div class="row">
+      <div class="col-4" *ngIf="addorEdit">
+        <form [formGroup]="formProceso">
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              formControlName="nombre"
+              [(ngModel)]="proceso.nombre"
+            />
+            <mat-error *ngIf="nombre.hasError('required')"
+              >Ingrese nombre del proceso</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>Descripcion</mat-label>
+
+            <textarea
+              matInput
+              formControlName="descripcion"
+              [(ngModel)]="proceso.descripcion"
+            ></textarea>
+          </mat-form-field>
+        </form>
+        <div class="row">
+          <div class="col d-flex">
+            <button class="btn btn-outline-danger btn-sm ml-auto" (click)="addorEdit=false">Cancelar</button>
+            <button class="btn btn-warning btn-sm ml-1">Agregar</button>
+          </div>
+        </div>
+      </div>
+      <div class="col" [ngClass]="">
+        <ag-grid-angular
+          style="width: 100%; height: 500px"
+          class="ag-theme-alpine"
+          [rowData]="rowData"
+          [columnDefs]="columnDefs"
+          [frameworkComponents]="frameworkComponents"
+        >
+        </ag-grid-angular>
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Proceso } from "src/app/interfaces/proceso";
 import { ButtonRendererComponent } from "src/app/rendered/button-renderer.component";
 
 @Component({
@@ -7,20 +9,27 @@ import { ButtonRendererComponent } from "src/app/rendered/button-renderer.compon
   styleUrls: ["./proceso.component.scss"],
 })
 export class ProcesoComponent implements OnInit {
+  public  formProceso : FormGroup;
+  proceso:Proceso={
+    nombre:null,
+    descripcion:null
+  }
   constructor() {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       
     };
+    this.formProceso=this.createFormGroup();
   }
 
   ngOnInit(): void {}
   frameworkComponents: any;
+  addorEdit:boolean = false;
   @ViewChild("contenido") myModalSubProceso: ElementRef;
   rowDataClicked1 = {};
   columnDefs = [
-    { field: "make", headerName: "Nombre" },
-    { field: "model", headerName: "Descripcion" },
+    { field: "make", headerName: "Nombre",editable:true },
+    { field: "model", headerName: "Descripcion" ,editable:true },
     { field: "price", headerName: "Fecha de Registro" },
     
     {
@@ -51,4 +60,13 @@ export class ProcesoComponent implements OnInit {
   agregarProceso() {}
   editProceso(value) {}
   deleteProceso(value) {}
+  createFormGroup(){
+    return new FormGroup({
+      nombre: new FormControl('',[Validators.required]),
+      descripcion: new FormControl(''),
+      
+    });
+  }
+  get nombre() { return this.formProceso.get('nombre'); }
+  get descripcion() { return this.formProceso.get('descripcion'); }
 }

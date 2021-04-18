@@ -18,6 +18,7 @@ import { MaterialModule } from "../admin/material/material.module";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ModalContraseniaComponent } from "./starter/modals/modal-contrasenia/modal-contrasenia.component";
+import { SubProcesoComponent } from './starter/pages/sub-proceso/sub-proceso.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ModalContraseniaComponent } from "./starter/modals/modal-contrasenia/mo
     ProcesoComponent,
     PerfilComponent,
     ModalContraseniaComponent,
+    SubProcesoComponent,
   ],
   imports: [
     CommonModule,
