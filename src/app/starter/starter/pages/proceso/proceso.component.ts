@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Proceso } from "src/app/interfaces/proceso";
 import { ButtonRendererComponent } from "src/app/rendered/button-renderer.component";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: "app-proceso",
@@ -14,7 +15,7 @@ export class ProcesoComponent implements OnInit {
     nombre:null,
     descripcion:null
   }
-  constructor() {
+  constructor(private modal:NgbModal) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       
@@ -44,7 +45,7 @@ export class ProcesoComponent implements OnInit {
     {
       cellRenderer: "buttonRenderer",
       cellRendererParams: {
-        onClick: this.deleteProceso.bind(this),
+        onClick: this.viewSub.bind(this),
         class: "btn btn-success btn-sm",
         label:'Subprocesos'
       },
@@ -59,7 +60,9 @@ export class ProcesoComponent implements OnInit {
   ];
   agregarProceso() {}
   editProceso(value) {}
-  deleteProceso(value) {}
+  viewSub(value) {
+    this.modal.open(this.myModalSubProceso,{ size: 'xl' ,backdrop:false });
+  }
   createFormGroup(){
     return new FormGroup({
       nombre: new FormControl('',[Validators.required]),
