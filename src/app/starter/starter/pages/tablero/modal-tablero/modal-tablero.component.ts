@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { showError, showConfirm } from 'src/app/functions/alerts';
 import { Tablero } from 'src/app/interfaces/tablero';
 import { ButtonRendererComponent } from 'src/app/rendered/button-renderer.component';
 import { Indicador } from '../../../../../interfaces/indicador';
 import { Iniciativa } from '../../../../../interfaces/iniciativa';
+import { IndicadorService } from '../../../../../services/indicador.service';
+import { TableroService } from '../../../../../services/tablero.service';
 
 @Component({
   selector: 'app-modal-tablero',
@@ -11,8 +14,9 @@ import { Iniciativa } from '../../../../../interfaces/iniciativa';
   styleUrls: ['./modal-tablero.component.scss']
 })
 export class ModalTableroComponent implements OnInit {
-
-  constructor() { 
+  @Input() tablero:Tablero;
+  @Output() tableroOut: EventEmitter<Tablero>=new EventEmitter();
+  constructor(private indicadorService:IndicadorService,private tableroService:TableroService) { 
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       
@@ -21,10 +25,12 @@ export class ModalTableroComponent implements OnInit {
   listaIndicador:Indicador[];
   frameworkComponents: any;
   rowData:any;
+  idTablero:string;
+  isEdit:boolean=false;
   columnDefs = [
-    { field: "nom_subproceso", headerName: "Nombre",editable:true },
-    { field: "des_subproceso", headerName: "Descripcion" ,editable:true },
-    { field: "id_subproceso", hide: true },
+    
+    { field: "des_iniciativa", headerName: "Descripcion"},
+    { field: "id_iniciativa", hide: true },
     
     {
       cellRenderer: "buttonRenderer",
@@ -46,25 +52,33 @@ export class ModalTableroComponent implements OnInit {
       
     },
   ];
-
-  tablero:Tablero={
-    id_tablero:null,
-    nom_responsable:null,
-    nom_tablero:null,
-    objetivo:null,
-    sem_ambar:null,
-    sem_rojo:null,
-    sem_verde:null,
-    id_indicador:null,
-    responsable:null
-  }
+  ruc:string;
+  
   iniciativa:Iniciativa={
     des_iniciativa:null,
-    id_tablero:null
+    id_tablero:null,
+    id_iniciativa:null
   }
   public  formTablero : FormGroup;
   ngOnInit(): void {
     this.formTablero=this.createFormGroup();
+    let jsonParse= JSON.parse(localStorage.getItem('infoUser'));
+    this.ruc=jsonParse.ruc_empresa;
+    this.getIndicadores();
+    console.log(this.tablero);
+    if(this.tablero.id_tablero!=null){
+      console.log(this.tablero);
+      console.log('dsa');
+      this.getIniciativas();
+    }else{
+      this.tableroService.getCantidadDeRegistros().subscribe((data:any)=>{
+        console.log(data[0].cantidad);
+        this.idTablero='T'+data[0].cantidad;
+        this.tablero.id_tablero=this.idTablero;
+        console.log(this.tablero);
+      })
+    }
+   
   }
   createFormGroup(){
     return new FormGroup({
@@ -92,15 +106,63 @@ export class ModalTableroComponent implements OnInit {
   get verde() { return this.formTablero.get('verde'); }
   
   agregarIniciativa(){
-
+    if(this.tablero.continue){
+      this.iniciativa.id_tablero=this.tablero.id_tablero;
+      console.log(this.iniciativa);
+      if(this.isEdit){
+        this.tableroService.updateIniciativa(this.iniciativa).subscribe((data:any)=>{
+          if(data.success){
+            this.getIniciativas();
+            this.isEdit=false;
+            this.reseteIniciativa();
+            showConfirm('Exito',data.message);
+            
+          }
+        })
+      }else{
+        this.tableroService.insertIniciativa(this.iniciativa).subscribe((data:any)=>{
+          if(data.success){
+            this.getIniciativas();
+            this.reseteIniciativa();
+            showConfirm('Exito',data.message);
+          }
+      })
+      }
+      
+    }else{
+      showError('Error','Primero guarde el tablero');
+    }
   }
-  editIniciativa(){
-
+  reseteIniciativa(){
+    this.iniciativa.id_tablero=null;
+    this.iniciativa.id_iniciativa=null;
+    this.iniciativa.des_iniciativa=null;
+  }
+  getIniciativas(){
+    this.tableroService.getIniciativa(this.tablero.id_tablero).subscribe((data:any)=>{
+      this.rowData=data;
+    })
+  }
+  editIniciativa(e){
+    this.iniciativa= e.rowData;
+    this.isEdit=true;
   }
   deleteIniciativa(){
 
   }
   sendTablero(){
-
+    
+    this.formTablero.markAllAsTouched();
+    if (!this.formTablero.invalid) {
+      this.tableroOut.emit(this.tablero);
+    } else {
+      
+      showError("Error", "Complete los campos");
+    }
+  }
+  getIndicadores(){
+    this.indicadorService.getIndicadores(this.ruc).subscribe((data:Indicador[])=>{
+      this.listaIndicador=data;
+    })
   }
 }
