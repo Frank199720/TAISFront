@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Sub Proceso</h4>
+  <h4 class="modal-title" id="modal-basic-title">Subprocesos de {{proceso.nom_proceso}}</h4>
 </div>
 <div class="modal-body">
   
@@ -26,7 +26,7 @@
             <input
               matInput
               formControlName="nombre"
-              [(ngModel)]="subProceso.nombre"
+              [(ngModel)]="subProceso.nom_subproceso"
             />
             <mat-error *ngIf="nombre.hasError('required')"
               >Ingrese nombre del proceso</mat-error
@@ -38,7 +38,7 @@
             <textarea
               matInput
               formControlName="descripcion"
-              [(ngModel)]="subProceso.descripcion"
+              [(ngModel)]="subProceso.des_subproceso"
             ></textarea>
           </mat-form-field>
         </form>
@@ -50,7 +50,7 @@
             >
               Cancelar
             </button>
-            <button class="btn btn-warning btn-sm ml-1">Agregar</button>
+            <button class="btn btn-warning btn-sm ml-1" (click)="guardarSubProceso()">Agregar</button>
           </div>
         </div>
       </div>

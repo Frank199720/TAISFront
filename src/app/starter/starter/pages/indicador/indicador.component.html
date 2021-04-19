@@ -1,3 +1,6 @@
+<ng-template #contenido let-modal>
+  <app-modal-indicador [idproceso]="idProceso"></app-modal-indicador>
+</ng-template>
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -23,11 +26,9 @@
     <div class="row mb-2 d-flex mr-3">
       <mat-form-field class="example-full-width col-6 ml-auto">
         <mat-label>Seleccione un proceso</mat-label>
-        <select matNativeControl>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
+        <select matNativeControl [(ngModel)]="idProceso">
+          <option [value]="item.id_proceso" *ngFor="let item of listaProceso">{{item.des_proceso}}</option>
+          
         </select>
       </mat-form-field>
 
@@ -35,7 +36,7 @@
         mat-raised-button
         color="primary"
         style="height: 50px;"
-        (click)="agregarProceso();"
+        (click)="agregarIndicador();"
       >
         Agregar indicador
       </button>

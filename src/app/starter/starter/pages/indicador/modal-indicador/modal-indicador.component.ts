@@ -8,12 +8,25 @@ import { Indicador } from '../../../../../interfaces/indicador';
   styleUrls: ['./modal-indicador.component.scss']
 })
 export class ModalIndicadorComponent implements OnInit {
-  @Input() indicador:Indicador;
+  @Input() idproceso:number;
   @Output() empresaout: EventEmitter<Indicador>=new EventEmitter();
   public  formIndicador : FormGroup;
+  indicador:Indicador={
+    id_subproceso:null,
+    preg_cinco:null,
+    preg_uno:null,
+    preg_cuatro:null,
+    preg_dos:null,
+    preg_tres:null,
+    formula:null,
+    nom_indicador:null
+  }
   constructor() { }
 
   ngOnInit(): void {
+  }
+  sendIndicador(){
+    
   }
   createFormGroup(){
     return new FormGroup({

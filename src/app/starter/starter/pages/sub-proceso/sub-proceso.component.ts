@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { showConfirm, showError } from 'src/app/functions/alerts';
 import { Subproceso } from 'src/app/interfaces/subproceso';
 import { ButtonRendererComponent } from 'src/app/rendered/button-renderer.component';
+import { Proceso } from '../../../../interfaces/proceso';
+import { SubprocesoService } from '../../../../services/subproceso.service';
 
 @Component({
   selector: 'app-sub-proceso',
@@ -10,11 +13,15 @@ import { ButtonRendererComponent } from 'src/app/rendered/button-renderer.compon
 })
 export class SubProcesoComponent implements OnInit {
   public  formSubProceso : FormGroup;
+  @Input() proceso: Proceso;
+  
   subProceso:Subproceso={
-    nombre:null,
-    descripcion:null
+    nom_subproceso:null,
+    des_subproceso:null,
+    id_proceso:null,
+    id_subproceso:null
   }
-  constructor() { 
+  constructor(private subProcesoService:SubprocesoService) { 
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       
@@ -23,11 +30,12 @@ export class SubProcesoComponent implements OnInit {
   }
   frameworkComponents: any;
   addorEdit:boolean = false;
-  rowDataClicked1 = {};
+  rowDataClicked1:Subproceso;
+  isEdit:boolean=false;
   columnDefs = [
-    { field: "make", headerName: "Nombre",editable:true },
-    { field: "model", headerName: "Descripcion" ,editable:true },
-    { field: "price", headerName: "Fecha de Registro" },
+    { field: "nom_subproceso", headerName: "Nombre",editable:true },
+    { field: "des_subproceso", headerName: "Descripcion" ,editable:true },
+    { field: "id_subproceso", hide: true },
     
     {
       cellRenderer: "buttonRenderer",
@@ -42,18 +50,22 @@ export class SubProcesoComponent implements OnInit {
       cellRenderer: "buttonRenderer",
       cellRendererParams: {
         onClick: this.deleteProceso.bind(this),
-        class: "btn btn-outline-success btn-sm",
-        label:'Subprocesos'
+        class: "btn btn-outline-danger btn-sm",
+        label:'',
+        icon:'far fa-trash-alt'
       },
       
     },
   ];
-  rowData = [
-    { make: "Toyota", model: "Celica", price: 35000 },
-    { make: "Ford", model: "Mondeo", price: 32000 },
-    { make: "Porsche", model: "Boxter", price: 72000 },
-  ];
+  rowData:any;
   ngOnInit(): void {
+    this.getSubProcesos();
+  }
+  getSubProcesos(){
+    
+    this.subProcesoService.getSubProcesos(this.proceso.id_proceso).subscribe((data)=>{
+      this.rowData=data;
+    })
   }
   createFormGroup(){
     return new FormGroup({
@@ -62,9 +74,42 @@ export class SubProcesoComponent implements OnInit {
       
     });
   }
-  agregarProceso() {}
-  editProceso(value) {}
+  agregarProceso() {
+    this.isEdit=false;
+  }
+  editProceso(e) {
+    this.isEdit=true;
+    this.addorEdit=true;
+    this.rowDataClicked1 = e.rowData;
+    this.subProceso=this.rowDataClicked1;
+  }
   deleteProceso(value) {}
+  guardarSubProceso(){
+    this.subProceso.id_proceso=this.proceso.id_proceso;
+    console.log(this.subProceso);
+    if(this.isEdit){
+      this.subProcesoService.updateSubProceso(this.subProceso).subscribe((data:any)=>{
+        if(data.success){
+          this.getSubProcesos();
+          showConfirm('Exito',data.message);
+          this.addorEdit=false;
+        }else{
+          showError('Error',data.message);
+        }
+        
+      })
+    }else{
+      this.subProcesoService.insertSubProceso(this.subProceso).subscribe((data:any)=>{
+        if(data.success){
+          showConfirm('Exito',data.message);
+          this.getSubProcesos();
+          this.addorEdit=false;
+        }else{
+          showError('Error',data.message);
+        }
+      })
+    }
+  }
   get nombre() { return this.formSubProceso.get('nombre'); }
   get descripcion() { return this.formSubProceso.get('descripcion'); }
 }

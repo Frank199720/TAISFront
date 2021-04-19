@@ -43,7 +43,7 @@ export class ProcesoComponent implements OnInit {
   addorEdit:boolean = false;
   isEdit:boolean=false;
   @ViewChild("contenido") myModalSubProceso: ElementRef;
-  rowDataClicked1 = {};
+  rowDataClicked1:Proceso;
   columnDefs = [
     { field: "nom_proceso", headerName: "Nombre",editable:true },
     { field: "des_proceso", headerName: "Descripcion" ,editable:true },
@@ -112,7 +112,9 @@ export class ProcesoComponent implements OnInit {
       console.log(data);
     })
   }
-  viewSub(value) {
+  viewSub(e) {
+    this.rowDataClicked1 = e.rowData;
+    this.proceso=this.rowDataClicked1;
     this.modal.open(this.myModalSubProceso,{ size: 'xl' ,backdrop:false });
   }
   createFormGroup(){
