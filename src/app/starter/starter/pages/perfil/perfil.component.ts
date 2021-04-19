@@ -11,17 +11,17 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class PerfilComponent implements OnInit {
   @ViewChild("contenido") myModal: ElementRef;
   usuario:Usuario={
-    ruc:null,
-    direccion:'ALEATORIA',
-    nombre:null,
-    apellido_materno:null,
-    apellido_paterno:null,
-    correo:null,
-    celular:null,
+    usu_nombre:null,
+    usu_apellidom:null,
+    usu_apellidop:null,
     username:null,
     password:null,
-    rol:null,
-    dni:null
+    ruc_empresa:null,
+    usu_direccion:null,
+    id:null,
+    usu_telefono:null,
+    id_rol:null,
+    usu_dni:null
   }
   public  formPerfil : FormGroup;
   isEdit=false;

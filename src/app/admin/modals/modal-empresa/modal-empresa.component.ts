@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { showError } from 'src/app/functions/alerts';
 import { Company } from '../../../interfaces/company';
+import { EmpresaService } from '../../../services/empresa.service';
 
 @Component({
   selector: 'app-modal-empresa',
@@ -12,12 +13,14 @@ export class ModalEmpresaComponent implements OnInit {
   @Input() empresa:Company;
   @Output() empresaout: EventEmitter<Company>=new EventEmitter();
   public  formEmpresa : FormGroup;
- 
-  constructor() { 
-    this.formEmpresa=this.createFormGroup();
+  
+  constructor(private EmpresaService:EmpresaService ) { 
+    
   }
   
   ngOnInit(): void {
+    this.formEmpresa=this.createFormGroup();
+    
   }
   createFormGroup(){
     return new FormGroup({
@@ -43,10 +46,11 @@ export class ModalEmpresaComponent implements OnInit {
 
   get correo() { return this.formEmpresa.get('correo'); }
   sendCompany(){
-    console.log(this.empresa)
+       
+    
     this.formEmpresa.markAllAsTouched;
     if(!this.formEmpresa.invalid){
-      
+      console.log('xd')
       this.empresaout.emit(this.empresa);
     }else{
       

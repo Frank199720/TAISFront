@@ -7,59 +7,54 @@
       <form [formGroup]="formUsuario">
         <mat-form-field class="example-full-width col-3">
           <mat-label>DNI</mat-label>
-          <input matInput formControlName="dni" [(ngModel)]="usuario.dni">
+          <input matInput formControlName="dni" [(ngModel)]="usuario.usu_dni">
             <mat-error *ngIf="dni.hasError('required')">Ingrese DNI</mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width col-9">
           <mat-label>NOMBRES</mat-label>
-          <input matInput formControlName="nombres" [(ngModel)]="usuario.nombre">
+          <input matInput formControlName="nombres" [(ngModel)]="usuario.usu_nombre">
             <mat-error *ngIf="dni.hasError('required')">Ingrese los nombres</mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width col-6">
           <mat-label>APELLIDO PATERNO</mat-label>
-          <input matInput formControlName="apellidos" [(ngModel)]="usuario.apellido_paterno">
+          <input matInput formControlName="apellidos" [(ngModel)]="usuario.usu_apellidop">
             <mat-error *ngIf="apellidos.hasError('required')">Ingrese los apellidos</mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width col-6">
           <mat-label>APELLIDO MATERNO</mat-label>
-          <input matInput formControlName="apellidos" [(ngModel)]="usuario.apellido_paterno">
+          <input matInput formControlName="apellidos" [(ngModel)]="usuario.usu_apellidom">
             <mat-error *ngIf="apellidos.hasError('required')">Ingrese los apellidos</mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width col-12">
           <mat-label>DIRECCION</mat-label>
-          <input matInput formControlName="direccion" [(ngModel)]="usuario.direccion">
+          <input matInput formControlName="direccion" [(ngModel)]="usuario.usu_direccion">
             <mat-error *ngIf="direccion.hasError('required')">Ingrese la dirección</mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width col-6">
-          <mat-label>CORREO</mat-label>
-          <input matInput type="email" formControlName="correo" [(ngModel)]="usuario.correo">
-         
-        </mat-form-field>
+       
         <mat-form-field class="example-full-width col-6">
           <mat-label>CELULAR</mat-label>
-          <input matInput formControlName="celular" [(ngModel)]="usuario.celular">
+          <input matInput formControlName="celular" [(ngModel)]="usuario.usu_telefono">
             
         </mat-form-field>
       
         <mat-divider></mat-divider>
         <mat-form-field appearance="fill" class="example-full-width col-6">
           <mat-label>EMPRESA</mat-label>
-          <select matNativeControl formControlName="empresa">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
+          <select  formControlName="empresa" [(ngModel)]="usuario.ruc_empresa" matNativeControl>
+            <option [value]="item.ruc_empresa" *ngFor="let item of listaEmpresa">{{item.emp_nombrec}}</option>
+            
           </select>
+         
           <mat-error *ngIf="empresa.hasError('required')">Seleccione una empresa</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill" class="example-full-width col-6">
           <mat-label>ROL</mat-label>
-          <select matNativeControl formControlName="rol">
+          <mat-select  formControlName="rol">
             <option value="volvo">Volvo</option>
             <option value="saab">Saab</option>
             <option value="mercedes">Mercedes</option>
             <option value="audi">Audi</option>
-          </select>
+          </mat-select>
           <mat-error *ngIf="rol.hasError('required')">Seleccione un rol</mat-error>
         </mat-form-field>
       </form>
@@ -69,7 +64,7 @@
     <button type="button" class="btn btn-secondary" data-dismiss="modal">
       Cancelar
     </button>
-    <button type="button" class="btn btn-primary" (click)="sendUser()">
+    <button ngbAutofocus type="button" class="btn btn-primary" (click)="sendUser()">
       Guardar
     </button>
   </div>

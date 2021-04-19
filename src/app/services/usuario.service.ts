@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Usuario } from '../interfaces/usuario';
 
 @Injectable({
@@ -16,13 +16,14 @@ export class UsuarioService {
     return this.httpClient.put(this.route,usuario)
   }
   public inactiveUser(idUser:number){
-    return this.httpClient.delete(this.route+idUser)
+    return this.httpClient.delete(this.route+'/usuario/'+idUser);
   }
   public getUsers(){
-    return this.httpClient.get(this.route)
+    return this.httpClient.get(this.route+'/usuario')
   }
   public getUserByID(idUser:number){
-    return this.httpClient.get(this.route+idUser)
+  
+    return this.httpClient.get(this.route+'/usuario?id='+idUser)
   }
   public resetPassword(idUser:number){
     return this.httpClient.get(this.route+idUser)

@@ -15,8 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { ModalEmpresaComponent } from './modals/modal-empresa/modal-empresa.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
-import { EmpresaComponent } from './pages/empresa/empresa.component';
-
+import { EmpresaComponent } from './pages/empresa/empresa.component'; 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -37,6 +37,7 @@ import { EmpresaComponent } from './pages/empresa/empresa.component';
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
+    NgbModule,
     AgGridModule.withComponents([
       ButtonRendererComponent,
       ButtonDeleteComponent,

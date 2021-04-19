@@ -1,14 +1,17 @@
 export interface Usuario {
-    nombre:string;
-    apellido_paterno:string;
-    apellido_materno:string;
+    usu_nombre:string;
+    usu_apellidom:string;
+    usu_apellidop:string;
     username:string;
     password:string;
-    ruc:string;
-    direccion:string,
+    ruc_empresa:string;
+    usu_direccion:string,
     id?:number,
-    correo:string,
-    celular:string,
-    rol:string,
-    dni:string
+    
+    usu_telefono:string,
+    id_rol:number,
+    usu_dni:string,
+    fecha_creacion?:Date,
+    fecha_desactivacion?:Date,
+    fecha_edicion?:Date
 }

@@ -7,37 +7,37 @@
         <form [formGroup]="formEmpresa">
           <mat-form-field class="example-full-width col-3">
             <mat-label>RUC</mat-label>
-            <input matInput formControlName="ruc" [(ngModel)]="empresa.ruc">
-              <mat-error *ngIf="ruc.hasError('required')">Ingrese DNI</mat-error>
+            <input matInput formControlName="ruc" [(ngModel)]="empresa.ruc_empresa">
+              <mat-error *ngIf="ruc.hasError('required')">Ingrese RUC</mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width col-9">
             <mat-label>RAZÓN SOCIAL</mat-label>
-            <input matInput formControlName="razonSocial" [(ngModel)]="empresa.nombrec">
+            <input matInput formControlName="razonSocial" [(ngModel)]="empresa.emp_nombrec">
               <mat-error *ngIf="razonSocial.hasError('required')">Ingrese los nombres</mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width col-6">
             <mat-label>GIRO NEGOCIO</mat-label>
-            <input matInput formControlName="giro" [(ngModel)]="empresa.gironegocio">
+            <input matInput formControlName="giro" [(ngModel)]="empresa.emp_gironegocio">
               <mat-error *ngIf="giro.hasError('required')">Ingrese los apellidos</mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width col-6">
             <mat-label>TIPO CONTRIBUYENTE</mat-label>
-            <input matInput formControlName="contribuyente" [(ngModel)]="empresa.contribuyente">
+            <input matInput formControlName="contribuyente" [(ngModel)]="empresa.emp_tipocontribuyente">
               <mat-error *ngIf="contribuyente.hasError('required')">Ingrese la dirección</mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width col-12">
             <mat-label>DIRECCION</mat-label>
-            <input matInput formControlName="direccion" [(ngModel)]="empresa.direccion">
+            <input matInput formControlName="direccion" [(ngModel)]="empresa.emp_direccion">
            
           </mat-form-field>
           <mat-form-field class="example-full-width col-6">
             <mat-label>EMAIL</mat-label>
-            <input matInput type="email" formControlName="correo" [(ngModel)]="empresa.email">
+            <input matInput type="email" formControlName="correo" [(ngModel)]="empresa.emp_email">
               
           </mat-form-field>
           <mat-form-field class="example-full-width col-6">
             <mat-label>TELEFONO</mat-label>
-            <input matInput formControlName="telefono" [(ngModel)]="empresa.telefono">
+            <input matInput formControlName="telefono" [(ngModel)]="empresa.emp_telefono">
               
           </mat-form-field>
 

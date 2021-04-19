@@ -2,6 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ButtonRendererComponent } from "src/app/rendered/button-renderer.component";
 import { Company } from '../../../interfaces/company';
+import { EmpresaService } from '../../../services/empresa.service';
+import { showConfirm,showError } from 'src/app/functions/alerts';
+
 
 @Component({
   selector: "app-empresa",
@@ -10,27 +13,31 @@ import { Company } from '../../../interfaces/company';
 })
 export class EmpresaComponent implements OnInit {
   empresa:Company={
-    ruc:null,
-    contribuyente:null,
-    gironegocio:null,
-    direccion:null,
-    email:null,
-    telefono:null,
-    nombrec:null
+    ruc_empresa:null,
+    emp_tipocontribuyente:null,
+    emp_gironegocio:null,
+    emp_direccion:null,
+    emp_email:null,
+    emp_telefono:null,
+    emp_nombrec:null,
+    emp_estado:null
   };
+  isEdit:boolean=false;
   frameworkComponents: any;
   @ViewChild("contenido") myModal: ElementRef;
   rowDataClicked1 = {};
   columnDefs = [
-    { field: "make", headerName: "Nombre" },
-    { field: "model", headerName: "Rol" },
-    { field: "price", headerName: "Fecha de Registro" },
+    { field: "ruc_empresa", headerName: "RUC" },
+    { field: "emp_nombrec", headerName: "Razón Social" },
+    { field: "emp_direccion", headerName: "Dirección" },
+    { field: "emp_telefono", headerName: "Teléfono" },
+    { field: "fecha_creacion", headerName: "Fecha de Registro" },
     {
-      field: "model",
+      field: "emp_estado",
       headerName: "Estado",
       cellRenderer: (params) => {
         return `<span ${
-          params.value == "Celica"
+          params.value == 0
             ? 'class="badge badge-pill badge-danger">Inactivo'
             : 'class="badge badge-pill badge-success">Activo'
         }</span>`;
@@ -65,26 +72,44 @@ export class EmpresaComponent implements OnInit {
     },
   ];
 
-  rowData = [
-    { make: "Toyota", model: "Celica", price: 35000 },
-    { make: "Ford", model: "Mondeo", price: 32000 },
-    { make: "Porsche", model: "Boxter", price: 72000 },
-  ];
-  constructor(private modal:NgbModal) {
+  rowData :any;
+  constructor(private modal:NgbModal,private EmpresaService:EmpresaService) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent
      
     };
+    
   }
-
-  ngOnInit(): void {}
+  getEmpresas(){
+    this.EmpresaService.getEmpresas().subscribe((data:any)=>{
+      this.rowData=data;
+    })
+  }
+  ngOnInit(): void {
+    this.getEmpresas();
+  }
   agregarEmpresa() {
     this.modal.open(this.myModal);
   }
   editCompany() {}
   deleteCompany() {}
   activeCompany() {}
-  receptCompany(empresa:Company){
+  receptCompany(empresa_recep:Company){
+    console.log('x');
+    if(this.isEdit){
 
+    }else{
+      this.EmpresaService.insertEmpresa(empresa_recep).subscribe((data:any)=>{
+        console.log(data);
+        if(data.success){
+          this.getEmpresas();
+          showConfirm('Exito',data.message);
+          this.modal.dismissAll();
+          
+        }else{
+          showError('Fracaso',data.message);
+        }
+      })
+    }
   }
 }

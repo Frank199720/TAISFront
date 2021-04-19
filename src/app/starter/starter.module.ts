@@ -19,6 +19,9 @@ import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ModalContraseniaComponent } from "./starter/modals/modal-contrasenia/modal-contrasenia.component";
 import { SubProcesoComponent } from './starter/pages/sub-proceso/sub-proceso.component';
+import { IndicadorComponent } from './starter/pages/indicador/indicador.component';
+import { ModalIndicadorComponent } from './starter/pages/indicador/modal-indicador/modal-indicador.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { SubProcesoComponent } from './starter/pages/sub-proceso/sub-proceso.com
     PerfilComponent,
     ModalContraseniaComponent,
     SubProcesoComponent,
+    IndicadorComponent,
+    ModalIndicadorComponent,
+   
   ],
   imports: [
     CommonModule,

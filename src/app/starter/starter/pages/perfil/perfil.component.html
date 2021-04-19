@@ -37,7 +37,7 @@
                 matInput
                 readonly
                 formControlName="dni"
-                [(ngModel)]="usuario.dni"
+                [(ngModel)]="usuario.usu_dni"
               />
             </mat-form-field>
             <mat-form-field class="example-full-width col-9">
@@ -46,7 +46,7 @@
                 matInput
                 readonly
                 formControlName="nombres"
-                [(ngModel)]="usuario.nombre"
+                [(ngModel)]="usuario.usu_nombre"
               />
             </mat-form-field>
             <mat-form-field class="example-full-width col-6">
@@ -55,7 +55,7 @@
                 matInput
                 formControlName="apellidos"
                 readonly
-                [(ngModel)]="usuario.apellido_paterno"
+                [(ngModel)]="usuario.usu_apellidop"
               />
             </mat-form-field>
             <mat-form-field class="example-full-width col-6">
@@ -64,7 +64,7 @@
                 matInput
                 formControlName="apellidos"
                 readonly
-                [(ngModel)]="usuario.apellido_materno"
+                [(ngModel)]="usuario.usu_apellidom"
               />
             </mat-form-field>
             <mat-form-field class="example-full-width col-12">
@@ -72,19 +72,11 @@
               <input
                 matInput
                 formControlName="direccion"
-                [(ngModel)]="usuario.direccion"
+                [(ngModel)]="usuario.usu_direccion"
                 [readonly]="!isEdit?'true':'false'"
               />
             </mat-form-field>
-            <mat-form-field class="example-full-width col-6">
-              <mat-label>CORREO</mat-label>
-              <input
-                matInput
-                formControlName="correo"
-                [(ngModel)]="usuario.correo"
-                [readonly]="!isEdit?'true':'false'"
-              />
-            </mat-form-field>
+            
             <mat-form-field class="example-full-width col-6">
               <mat-label>CELULAR</mat-label>
               <input
@@ -92,7 +84,7 @@
                 formControlName="celular"
               
                 [readonly]="!isEdit?'true':'false'"q
-                [(ngModel)]="usuario.celular"
+                [(ngModel)]="usuario.usu_telefono"
               />
             </mat-form-field>
             <div class="row m-0 justify-content-center">

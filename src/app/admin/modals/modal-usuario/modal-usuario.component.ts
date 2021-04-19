@@ -1,24 +1,36 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { ChangeDetectorRef,AfterContentChecked} from '@angular/core';
+import { EmpresaService } from '../../../services/empresa.service';
 import{showError} from '../../..//functions/alerts'
+import { Company } from 'src/app/interfaces/company';
 @Component({
   selector: 'app-modal-usuario',
   templateUrl: './modal-usuario.component.html',
   styleUrls: ['./modal-usuario.component.scss']
 })
-export class ModalUsuarioComponent implements OnInit , AfterContentChecked{
+export class ModalUsuarioComponent implements AfterViewInit{
   @Input() usuario:Usuario;
+  
   @Output() userOut: EventEmitter<Usuario>=new EventEmitter();
   public  formUsuario : FormGroup;
-  constructor(private formBuilder: FormBuilder,private changeDetector:ChangeDetectorRef) { 
-    this.formUsuario=this.createFormGroup();
+  listaEmpresa:Company[];
+  constructor(private formBuilder: FormBuilder,private changeDetector:ChangeDetectorRef,private EmpresaService:EmpresaService) { 
+    
   } 
-  
+  ngAfterViewInit(){
+    
+    
+  }
   ngOnInit(): void {
-    console.log(this.usuario);
+    
+    this.formUsuario=this.createFormGroup();
+    this.EmpresaService.getEmpresas().subscribe((data:Company[])=>{
+      this.listaEmpresa=data;
+      
+    })
   }
   sendUser(){
     console.log(this.usuario)

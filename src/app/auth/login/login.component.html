@@ -1,1 +1,41 @@
-<button class="btn btn-primary" (click)="login()">Go to Main</button>
+<body>
+  <div class="container">
+    <div class="row align-items-center justify-content-center vh-100">
+      <div class="col-6">
+        <mat-card class="mt-2">
+          
+
+          <mat-card-content>
+            <mat-form-field class="example-full-width col-12">
+              <mat-label class="col-12">Usuario</mat-label>
+              <input
+                type="email"
+                matInput
+                placeholder="Usuario"
+                [(ngModel)]="usuario.username"
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width col-12">
+              <mat-label>Contraseña</mat-label>
+              <input
+                type="password"
+                matInput
+                placeholder="Contraseña"
+                [(ngModel)]="usuario.password"
+              />
+            </mat-form-field>
+
+            <div class="row">
+              <div class="col text-center">
+                <button mat-raised-button (click)="login()">
+                  Ingresar
+                </button>
+              </div>
+              
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</body>

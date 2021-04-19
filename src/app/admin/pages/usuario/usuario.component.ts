@@ -16,36 +16,39 @@ export class UsuarioComponent implements OnInit {
   @ViewChild("contenido") myModal: ElementRef;
   private isEdit:boolean=false;
   usuario:Usuario={
-    nombre:null,
-    apellido_materno:null,
-    apellido_paterno:null,
+    usu_nombre:null,
+    usu_apellidom:null,
+    usu_apellidop:null,
     username:null,
     password:null,
-    ruc:null,
-    direccion:null,
+    ruc_empresa:null,
+    usu_direccion:null,
     id:null,
-    correo:null,
-    celular:null,
-    rol:null,
-    dni:null
+    usu_telefono:null,
+    id_rol:null,
+    usu_dni:null
   }
   constructor(private modal:NgbModal,private usuarioService:UsuarioService) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       buttonRenderer2: ButtonDeleteComponent,
     };
+    
   }
   rowDataClicked1 = {};
   columnDefs = [
-    { field: "make", headerName: "Nombre" },
-    { field: "model", headerName: "Rol" },
-    { field: "price", headerName: "Fecha de Registro" },
+    { field: "usu_nombre", headerName: "Nombre" },
+    { field: "usu_apellidop", headerName: "A. Paterno" },
+    { field: "usu_apellidom", headerName: "A. Materno" },
+    { field: "username", headerName: "Usuario" },
+    { field: "fecha_creacion", headerName: "Fecha de Registro" },
+    { field: 'id',headerName:'id',hide:true},
     {
-      field: "model",
+      field: "usu_estado",
       headerName: "Estado",
       cellRenderer: (params) => {
         return `<span ${
-          params.value == "Celica"
+          params.value == 0
             ? 'class="badge badge-pill badge-danger">Inactivo'
             : 'class="badge badge-pill badge-success">Activo'
         }</span>`;
@@ -84,25 +87,33 @@ export class UsuarioComponent implements OnInit {
       width:'70px'
     },
   ];
-
-  rowData = [
-    { make: "Toyota", model: "Celica", price: 35000 },
-    { make: "Ford", model: "Mondeo", price: 32000 },
-    { make: "Porsche", model: "Boxter", price: 72000 },
-  ];
-  ngOnInit(): void {}
+ 
+  rowData :any
+  ngOnInit(): void {
+    this.getUsers();
+  }
+  getUsers(){
+    this.usuarioService.getUsers().subscribe((data:any)=>{
+      this.rowData=data;
+    },
+    (err)=>{
+      console.log(err);
+    })
+  }
   open(value) {
     console.log(value);
   }
   editUser(e) {
     this.rowDataClicked1 = e.rowData;
+    let id= e.rowData.id;
     this.isEdit=true;
-    this.usuarioService.getUserByID(2).subscribe((data:Usuario)=>{
-      this.usuario=data;
+    this.usuarioService.getUserByID(id).subscribe((data:Usuario)=>{
+      this.usuario=data[0];
+      console.log(this.usuario);
       this.modal.open(this.myModal,{size:'lg'});
     })
     
-    this.modal.open(this.myModal,{size:'lg'});
+   
     console.log(this.rowDataClicked1);
   }
   deleteUser(e){
@@ -118,9 +129,12 @@ export class UsuarioComponent implements OnInit {
       if (result.isConfirmed) {
         this.usuarioService.inactiveUser(1).subscribe((data:any
           )=>{
-          if(data.success){
-
-          }
+            if(data.success){
+              this.getUsers();
+              showConfirm('Exito',data.message);
+            }else{
+              showConfirm('Error',data.message);
+            }
         })
       }
     })
@@ -139,7 +153,10 @@ export class UsuarioComponent implements OnInit {
         this.usuarioService.inactiveUser(1).subscribe((data:any
           )=>{
           if(data.success){
-
+            this.getUsers();
+            showConfirm('Exito',data.message);
+          }else{
+            showConfirm('Error',data.message);
           }
         })
       }
@@ -149,7 +166,7 @@ export class UsuarioComponent implements OnInit {
     console.log(user);
     this.modal.dismissAll();
     if(this.isEdit){
-      this.usuarioService.updateUsuario(user,2).subscribe((data:any)=>{
+      this.usuarioService.updateUsuario(user,user.id).subscribe((data:any)=>{
         if(data.success){
           showConfirm('Exito!',data.message);
         }else{

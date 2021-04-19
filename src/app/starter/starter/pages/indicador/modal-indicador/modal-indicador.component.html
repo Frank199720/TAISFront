@@ -1,0 +1,67 @@
+<!-- <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Mantenedor Indicador</h5>
+    </div>
+    <div class="modal-body">
+      <mat-card-content>
+        <form [formGroup]="formIndicador">
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>Nombre Indicador</mat-label>
+            <input matInput formControlName="nombre" [(ngModel)]="empresa.ruc">
+              <mat-error *ngIf="nombre.hasError('required')">Ingrese el nombre</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>¿Qué se desea medir con él?</mat-label>
+            <input matInput formControlName="medicion" [(ngModel)]="empresa.nombrec">
+              <mat-error *ngIf="medicion.hasError('required')">Ingrese el objetivo</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>¿Quién realizará la medición?</mat-label>
+            <input matInput formControlName="responsable" [(ngModel)]="empresa.gironegocio">
+              <mat-error *ngIf="responsable.hasError('required')">Ingrese los apellidos</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>Mecanismo a utilizar</mat-label>
+            <input matInput formControlName="mecanismo" [(ngModel)]="empresa.contribuyente">
+              <mat-error *ngIf="mecanismo.hasError('required')">Ingrese la dirección</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>¿Qué toleranciade desviación podrá determinarse?</mat-label>
+            <input matInput formControlName="tolerancia" [(ngModel)]="empresa.direccion">
+            <mat-error *ngIf="tolerancia.hasError('required')">Ingrese la dirección</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>¿Qué se harán con los resultados?</mat-label>
+            <input matInput type="text" formControlName="resultado" [(ngModel)]="empresa.email">
+            <mat-error *ngIf="resultado.hasError('required')">Ingrese la dirección</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="example-full-width col-6">
+            <mat-label>Sub Procesos</mat-label>
+            <select matNativeControl formControlName="subp">
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="mercedes">Mercedes</option>
+              <option value="audi">Audi</option>
+            </select>
+            <mat-error *ngIf="subp.hasError('required')">Seleccione un subproceso</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>Fórmula</mat-label>
+            <input matInput type="email" formControlName="formula" [(ngModel)]="empresa.email">
+            <mat-error *ngIf="formula.hasError('required')">Seleccione un subproceso</mat-error> 
+          </mat-form-field>
+
+         
+        </form>
+      </mat-card-content>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-primary" (click)="sendCompany()">
+        Guardar
+      </button>
+    </div>
+  </div>
+   -->

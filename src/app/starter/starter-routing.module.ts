@@ -5,6 +5,7 @@ import { StarterComponent } from './starter/starter.component';
 import { UsuarioComponent } from '../admin/pages/usuario/usuario.component';
 import { ProcesoComponent } from './starter/pages/proceso/proceso.component';
 import { PerfilComponent } from './starter/pages/perfil/perfil.component';
+import { IndicadorComponent } from './starter/pages/indicador/indicador.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path:'perfil',
         component: PerfilComponent
+      },
+      {
+        path:'indicador',
+        component:IndicadorComponent
       }
     ]
   }

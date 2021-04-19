@@ -11,30 +11,31 @@ import {showConfirm,showError} from '../../functions/alerts'
 export class LoginComponent implements OnInit {
 
   constructor(private router:Router,private authService:AuthService) { }
-  user:Usuario={
-    nombre:'Diana',
-    apellido_materno:'Sifuentes',
-    apellido_paterno:'Sifuentes',
-    username:'diana@gmail.com',
-    password:'1234',
-    direccion:null,
-    celular:null,
-    correo:null,
+  usuario:Usuario={
+    usu_nombre:null,
+    usu_apellidom:null,
+    usu_apellidop:null,
+    username:null,
+    password:null,
+    ruc_empresa:null,
+    usu_direccion:null,
     id:null,
-    rol:null,
-    dni:null,
-    ruc:null
+    usu_telefono:null,
+    id_rol:null,
+    usu_dni:null
   }
   ngOnInit(): void {
   }
   login(){
-    this.authService.login(this.user).subscribe((res:any)=>{
+    this.authService.login(this.usuario).subscribe((res:any)=>{
       console.log(res);
       
       if(res.success){
         localStorage.setItem('token',res.token);
         localStorage.setItem('infoUser',JSON.stringify(res.user));
         this.router.navigateByUrl('admin');
+      }else{
+        showError('Error',res.message);
       }
     })
     //this.router.navigateByUrl('starter');
