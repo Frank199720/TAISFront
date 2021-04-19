@@ -1,5 +1,5 @@
 <ng-template #contenido let-modal>
-  <app-modal-indicador [idproceso]="idProceso"></app-modal-indicador>
+  <app-modal-indicador [idproceso]="idProceso" (indicadorOut)="receptIndicador($event)"></app-modal-indicador>
 </ng-template>
 <div class="content-header">
   <div class="container-fluid">

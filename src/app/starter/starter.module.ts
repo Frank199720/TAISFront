@@ -21,6 +21,8 @@ import { ModalContraseniaComponent } from "./starter/modals/modal-contrasenia/mo
 import { SubProcesoComponent } from './starter/pages/sub-proceso/sub-proceso.component';
 import { IndicadorComponent } from './starter/pages/indicador/indicador.component';
 import { ModalIndicadorComponent } from './starter/pages/indicador/modal-indicador/modal-indicador.component';
+import { TableroComponent } from './starter/pages/tablero/tablero.component';
+import { ModalTableroComponent } from './starter/pages/tablero/modal-tablero/modal-tablero.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { ModalIndicadorComponent } from './starter/pages/indicador/modal-indicad
     SubProcesoComponent,
     IndicadorComponent,
     ModalIndicadorComponent,
+    TableroComponent,
+    ModalTableroComponent,
    
   ],
   imports: [

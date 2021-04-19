@@ -18,37 +18,35 @@
           <mat-form-field class="example-full-width col-12">
             <mat-label>¿Quién realizará la medición?</mat-label>
             <input matInput formControlName="responsable" [(ngModel)]="indicador.preg_dos">
-              <mat-error *ngIf="responsable.hasError('required')">Ingrese los apellidos</mat-error>
+              <mat-error *ngIf="responsable.hasError('required')">Ingrese el responsable</mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width col-12">
             <mat-label>Mecanismo a utilizar</mat-label>
             <input matInput formControlName="mecanismo" [(ngModel)]="indicador.preg_tres">
-              <mat-error *ngIf="mecanismo.hasError('required')">Ingrese la dirección</mat-error>
+              <mat-error *ngIf="mecanismo.hasError('required')">Ingrese el mecanismo de medida</mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width col-12">
             <mat-label>¿Qué toleranciade desviación podrá determinarse?</mat-label>
             <input matInput formControlName="tolerancia" [(ngModel)]="indicador.preg_cuatro">
-            <mat-error *ngIf="tolerancia.hasError('required')">Ingrese la dirección</mat-error>
+            <mat-error *ngIf="tolerancia.hasError('required')">Ingrese la tolerancia</mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width col-12">
             <mat-label>¿Qué se harán con los resultados?</mat-label>
-            <input matInput type="text" formControlName="resultado" [(ngModel)]="indicador.preg_cuatro">
-            <mat-error *ngIf="resultado.hasError('required')">Ingrese la dirección</mat-error>
+            <input matInput type="text" formControlName="resultado" [(ngModel)]="indicador.preg_cinco">
+            <mat-error *ngIf="resultado.hasError('required')">Ingrese acciones</mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill" class="example-full-width col-6">
             <mat-label>Sub Procesos</mat-label>
             <select matNativeControl formControlName="subp" [(ngModel)]="indicador.id_subproceso">
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
+              <option [value]="item.id_subproceso" *ngFor="let item of listaSubProceso">{{item.nom_subproceso}}</option>
+              
             </select>
             <mat-error *ngIf="subp.hasError('required')">Seleccione un subproceso</mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width col-12">
             <mat-label>Fórmula</mat-label>
             <input matInput  formControlName="formula" [(ngModel)]="indicador.formula">
-            <mat-error *ngIf="formula.hasError('required')">Seleccione un subproceso</mat-error> 
+            <mat-error *ngIf="formula.hasError('required')">Ingrese la formula</mat-error> 
           </mat-form-field>
 
          
@@ -59,7 +57,7 @@
       <button type="button" class="btn btn-secondary" data-dismiss="modal">
         Cancelar
       </button>
-      <button type="button" class="btn btn-primary" (click)="sendIndicador()">
+      <button type="button" class="btn btn-primary" (click)="sendIndicador()" ngbAutofocus>
         Guardar
       </button>
     </div>

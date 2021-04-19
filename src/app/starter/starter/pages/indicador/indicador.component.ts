@@ -3,6 +3,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ButtonRendererComponent } from 'src/app/rendered/button-renderer.component';
 import { ProcesoService } from '../../../../services/proceso.service';
 import { Proceso } from '../../../../interfaces/proceso';
+import { showError, showConfirm } from 'src/app/functions/alerts';
+import { Indicador } from '../../../../interfaces/indicador';
+import { IndicadorService } from '../../../../services/indicador.service';
 
 @Component({
   selector: 'app-indicador',
@@ -12,10 +15,10 @@ import { Proceso } from '../../../../interfaces/proceso';
 export class IndicadorComponent implements OnInit {
   idProceso:number;
   listaProceso:Proceso[];
-  
+  isedit:boolean=false;
   ruc:string;
   @ViewChild("contenido") myModalIndicador: ElementRef;
-  constructor(private modal:NgbModal,private ProcesoService:ProcesoService) {
+  constructor(private modal:NgbModal,private ProcesoService:ProcesoService,private IndicadorService:IndicadorService) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       
@@ -62,18 +65,30 @@ export class IndicadorComponent implements OnInit {
     },
   ];
 
-  rowData = [
-    { make: "Toyota", model: "Celica", price: 35000 },
-    { make: "Ford", model: "Mondeo", price: 32000 },
-    { make: "Porsche", model: "Boxter", price: 72000 },
-  ];
+  rowData:any;
   agregarIndicador() {
-    this.modal.open(this.myModalIndicador,{ size: 'xl' ,backdrop:false });
+    if(this.idProceso){
+      this.modal.open(this.myModalIndicador,{ size: 'lg' ,backdrop:false });
+    }else{
+      showError('Error','Seleccione un subproceso');
+    }
+    
   }
   editProceso(value) {}
   viewSub(value) {
     //
   }
-  
+  receptIndicador(indicador:Indicador){
+    if(this.isedit){
+
+    }else{
+      this.IndicadorService.insertIndicador(indicador).subscribe((data:any)=>{
+        if(data.success){
+          this.modal.dismissAll();
+          showConfirm('Exito',data.message);
+        }
+      })
+    }
+  }
 
 }

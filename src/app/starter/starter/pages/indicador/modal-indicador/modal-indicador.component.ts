@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { showError } from 'src/app/functions/alerts';
 import { Indicador } from '../../../../../interfaces/indicador';
+import { Subproceso } from '../../../../../interfaces/subproceso';
+import { SubprocesoService } from '../../../../../services/subproceso.service';
 
 @Component({
   selector: 'app-modal-indicador',
@@ -9,7 +12,8 @@ import { Indicador } from '../../../../../interfaces/indicador';
 })
 export class ModalIndicadorComponent implements OnInit {
   @Input() idproceso:number;
-  @Output() empresaout: EventEmitter<Indicador>=new EventEmitter();
+  @Output() indicadorOut: EventEmitter<Indicador>=new EventEmitter();
+  listaSubProceso:Subproceso[];
   public  formIndicador : FormGroup;
   indicador:Indicador={
     id_subproceso:null,
@@ -21,12 +25,23 @@ export class ModalIndicadorComponent implements OnInit {
     formula:null,
     nom_indicador:null
   }
-  constructor() { }
+  constructor(private SubprocesoService:SubprocesoService) { }
 
   ngOnInit(): void {
+    this.formIndicador=this.createFormGroup();
+    this.SubprocesoService.getSubProcesos(this.idproceso).subscribe((data:Subproceso[])=>{
+      this.listaSubProceso=data;
+    })
   }
   sendIndicador(){
     
+    this.formIndicador.markAllAsTouched();
+    if (!this.formIndicador.invalid) {
+      this.indicadorOut.emit(this.indicador);
+    } else {
+      
+      showError("Error", "Complete los campos");
+    }
   }
   createFormGroup(){
     return new FormGroup({
