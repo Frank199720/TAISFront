@@ -4,6 +4,7 @@ import { ButtonRendererComponent } from "src/app/rendered/button-renderer.compon
 import { Company } from '../../../interfaces/company';
 import { EmpresaService } from '../../../services/empresa.service';
 import { showConfirm,showError } from 'src/app/functions/alerts';
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -89,15 +90,71 @@ export class EmpresaComponent implements OnInit {
     this.getEmpresas();
   }
   agregarEmpresa() {
+    this.empresa.ruc_empresa=null;
+    this.empresa.emp_tipocontribuyente=null;
+    this.empresa.emp_gironegocio=null;
+    this.empresa.emp_direccion=null;
+    this.empresa.emp_email=null;
+    this.empresa.emp_telefono=null;
+    this.empresa.emp_nombrec=null;
+    this.empresa.emp_estado=null;
+    
     this.modal.open(this.myModal);
   }
-  editCompany() {}
-  deleteCompany() {}
+  editCompany(e) {
+    let ruc_empresa= e.rowData.ruc_empresa;
+    let estado=e.rowData.emp_estado;
+    if(estado==0){
+      showError('Error','La empresa ha sido desactivada');
+    }else{
+      this.isEdit=true;
+      this.EmpresaService.getEmpresaByID(ruc_empresa).subscribe((data:Company)=>{
+        this.empresa=data[0];
+        
+        this.modal.open(this.myModal,{size:'lg'});
+      })
+    }
+    
+  }
+  deleteCompany(e) {
+    let ruc_empresa= e.rowData.ruc_empresa;
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "La empresa quedará inactivada.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, de acuerdo'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.EmpresaService.deleteEmpresa(ruc_empresa).subscribe((data:any
+          )=>{
+            console.log(data);
+            if(data.success){
+              this.getEmpresas();
+              showConfirm('Exito',data.message);
+            }else{
+              showConfirm('Error',data.message);
+            }
+        })
+      }
+    })
+  }
   activeCompany() {}
   receptCompany(empresa_recep:Company){
     console.log('x');
+    
     if(this.isEdit){
-
+      this.EmpresaService.updateEmpresa(empresa_recep,empresa_recep.ruc_empresa).subscribe((data:any)=>{
+        if(data.success){
+          this.getEmpresas();
+          showConfirm('Exito',data.message);
+          this.modal.dismissAll();
+        }else{
+          showError('Error',data.message);
+        }
+      })
     }else{
       this.EmpresaService.insertEmpresa(empresa_recep).subscribe((data:any)=>{
         console.log(data);
@@ -107,7 +164,7 @@ export class EmpresaComponent implements OnInit {
           this.modal.dismissAll();
           
         }else{
-          showError('Fracaso',data.message);
+          showError('Error',data.message);
         }
       })
     }

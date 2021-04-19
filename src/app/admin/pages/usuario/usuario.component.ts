@@ -187,6 +187,7 @@ export class UsuarioComponent implements OnInit {
     }
   }
   agregarUsuario(){
+    this.isEdit=false;
     this.modal.open(this.myModal,{size:'lg'});
   }
 }

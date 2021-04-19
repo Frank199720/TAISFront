@@ -13,14 +13,18 @@ export class ModalEmpresaComponent implements OnInit {
   @Input() empresa:Company;
   @Output() empresaout: EventEmitter<Company>=new EventEmitter();
   public  formEmpresa : FormGroup;
-  
+  isEdit:boolean=false;
   constructor(private EmpresaService:EmpresaService ) { 
     
   }
   
   ngOnInit(): void {
     this.formEmpresa=this.createFormGroup();
-    
+    if(this.empresa.ruc_empresa===null){
+      this.isEdit=true;
+    }else{
+      this.isEdit=false;
+    }
   }
   createFormGroup(){
     return new FormGroup({

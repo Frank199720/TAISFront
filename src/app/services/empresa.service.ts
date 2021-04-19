@@ -15,4 +15,14 @@ export class EmpresaService {
   public insertEmpresa(empresa:Company){
     return this.httpClient.post(this.route+'/empresa',empresa);
   }
+  public deleteEmpresa(idEmpresa:string){
+    return this.httpClient.delete(this.route+'/empresa/'+idEmpresa);
+  }
+  public getEmpresaByID(idEmpresa:string){
+  
+    return this.httpClient.get(this.route+'/empresa?id='+idEmpresa);
+  }
+  public updateEmpresa(empresa:Company,idEmpresa:string){
+    return this.httpClient.put(this.route+'/empresa/'+idEmpresa,empresa);
+  }
 }
