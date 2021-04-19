@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ButtonRendererComponent } from 'src/app/rendered/button-renderer.component';
+import { ProcesoService } from '../../../../services/proceso.service';
+import { Proceso } from '../../../../interfaces/proceso';
 
 @Component({
   selector: 'app-indicador',
@@ -8,23 +10,37 @@ import { ButtonRendererComponent } from 'src/app/rendered/button-renderer.compon
   styleUrls: ['./indicador.component.scss']
 })
 export class IndicadorComponent implements OnInit {
-   
-  constructor(private modal:NgbModal) {
+  idProceso:number;
+  listaProceso:Proceso[];
+  
+  ruc:string;
+  @ViewChild("contenido") myModalIndicador: ElementRef;
+  constructor(private modal:NgbModal,private ProcesoService:ProcesoService) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       
     };
     
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let jsonParse= JSON.parse(localStorage.getItem('infoUser'));
+    this.ruc=jsonParse.ruc_empresa;
+    this.getProcesos();
+  }
+  getProcesos(){
+    this.ProcesoService.getProcesos(this.ruc).subscribe((data:Proceso[])=>{
+      this.listaProceso=data;
+    })
+  }
   frameworkComponents: any;
   addorEdit:boolean = false;
   
   rowDataClicked1 = {};
   columnDefs = [
-    { field: "make", headerName: "Nombre",editable:true },
-    { field: "model", headerName: "Descripcion" ,editable:true },
-    { field: "price", headerName: "Fecha de Registro" },
+    { field: "nom_indicador", headerName: "Nombre"},
+    { field: "preg_tres", headerName: "Encargado"},
+    { field: "nom_proceso", headerName: "Proceso" },
+    { field: "nom_subproceso", headerName: "SubProceso" },
     
     {
       cellRenderer: "buttonRenderer",
@@ -51,10 +67,12 @@ export class IndicadorComponent implements OnInit {
     { make: "Ford", model: "Mondeo", price: 32000 },
     { make: "Porsche", model: "Boxter", price: 72000 },
   ];
-  agregarProceso() {}
+  agregarIndicador() {
+    this.modal.open(this.myModalIndicador,{ size: 'xl' ,backdrop:false });
+  }
   editProceso(value) {}
   viewSub(value) {
-    //this.modal.open(this.myModalSubProceso,{ size: 'xl' ,backdrop:false });
+    //
   }
   
 
