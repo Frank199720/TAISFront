@@ -47,7 +47,7 @@
             <input
               matInput
               formControlName="nombre"
-              [(ngModel)]="proceso.nombre"
+              [(ngModel)]="proceso.nom_proceso"
             />
             <mat-error *ngIf="nombre.hasError('required')"
               >Ingrese nombre del proceso</mat-error
@@ -59,14 +59,14 @@
             <textarea
               matInput
               formControlName="descripcion"
-              [(ngModel)]="proceso.descripcion"
+              [(ngModel)]="proceso.des_proceso"
             ></textarea>
           </mat-form-field>
         </form>
         <div class="row">
           <div class="col d-flex">
             <button class="btn btn-outline-danger btn-sm ml-auto" (click)="addorEdit=false">Cancelar</button>
-            <button class="btn btn-warning btn-sm ml-1">Agregar</button>
+            <button class="btn btn-warning btn-sm ml-1" (click)="guardarProceso()">Agregar</button>
           </div>
         </div>
       </div>

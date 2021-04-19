@@ -49,12 +49,10 @@
         </mat-form-field>
         <mat-form-field appearance="fill" class="example-full-width col-6">
           <mat-label>ROL</mat-label>
-          <mat-select  formControlName="rol">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-          </mat-select>
+          <select  formControlName="rol" [(ngModel)]="usuario.id_rol" matNativeControl>
+            <option [value]="item.id_rol" *ngFor="let item of listaRol">{{item.rol_descripcion}}</option>
+            
+          </select>
           <mat-error *ngIf="rol.hasError('required')">Seleccione un rol</mat-error>
         </mat-form-field>
       </form>

@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Proceso } from "src/app/interfaces/proceso";
 import { ButtonRendererComponent } from "src/app/rendered/button-renderer.component";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProcesoService } from "src/app/services/proceso.service";
+import { showConfirm, showError } from "src/app/functions/alerts";
 
 @Component({
   selector: "app-proceso",
@@ -12,10 +14,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ProcesoComponent implements OnInit {
   public  formProceso : FormGroup;
   proceso:Proceso={
-    nombre:null,
-    descripcion:null
+    des_proceso:null,
+    ruc_empresa:null,
+    id_proceso:null,
+    nom_proceso:null
   }
-  constructor(private modal:NgbModal) {
+  ruc:string;
+  constructor(private modal:NgbModal,private procesoService:ProcesoService) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       
@@ -23,15 +28,26 @@ export class ProcesoComponent implements OnInit {
     this.formProceso=this.createFormGroup();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let jsonParse= JSON.parse(localStorage.getItem('infoUser'));
+    this.ruc=jsonParse.ruc_empresa;
+    this.proceso.ruc_empresa=this.ruc;
+    this.getProcesos();
+  }
+  getProcesos(){
+    this.procesoService.getProcesos(this.ruc).subscribe((data:any)=>{
+      this.rowData=data;
+    })
+  }
   frameworkComponents: any;
   addorEdit:boolean = false;
+  isEdit:boolean=false;
   @ViewChild("contenido") myModalSubProceso: ElementRef;
   rowDataClicked1 = {};
   columnDefs = [
-    { field: "make", headerName: "Nombre",editable:true },
-    { field: "model", headerName: "Descripcion" ,editable:true },
-    { field: "price", headerName: "Fecha de Registro" },
+    { field: "nom_proceso", headerName: "Nombre",editable:true },
+    { field: "des_proceso", headerName: "Descripcion" ,editable:true },
+    { field: "id_proceso", headerName: "Estado",hide:true },
     
     {
       cellRenderer: "buttonRenderer",
@@ -53,13 +69,49 @@ export class ProcesoComponent implements OnInit {
     },
   ];
 
-  rowData = [
-    { make: "Toyota", model: "Celica", price: 35000 },
-    { make: "Ford", model: "Mondeo", price: 32000 },
-    { make: "Porsche", model: "Boxter", price: 72000 },
-  ];
-  agregarProceso() {}
-  editProceso(value) {}
+  rowData :any
+  agregarProceso() {
+    this.isEdit=false;
+  }
+  guardarProceso(){
+    if(this.isEdit){
+      this.procesoService.editSubproceso(this.proceso).subscribe((data:any)=>{
+        if(data.success){
+          this.getProcesos();
+          showConfirm('Exito',data.message);
+          
+          this.addorEdit=false;
+        }else{
+          showError('Error',data.message);
+        
+        }
+      })
+    }else{
+      this.procesoService.guardarProceso(this.proceso).subscribe((data:any)=>{
+        if(data.success){
+          this.getProcesos();
+          showConfirm('Exito',data.message);
+          
+          this.addorEdit=false;
+        }else{
+          showError('Error',data.message);
+          
+        }
+      })
+    }
+    
+  }
+  editProceso(e) {
+    this.rowDataClicked1 = e.rowData;
+    let id= e.rowData.id_proceso;
+    this.procesoService.getProcesoByID(id).subscribe((data:Proceso)=>{
+      this.addorEdit=true;
+    this.isEdit=true;
+    
+      this.proceso=data;
+      console.log(data);
+    })
+  }
   viewSub(value) {
     this.modal.open(this.myModalSubProceso,{ size: 'xl' ,backdrop:false });
   }

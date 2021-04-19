@@ -1,4 +1,6 @@
 export interface Proceso {
-    nombre:string;
-    descripcion?:string;
+    nom_proceso:string;
+    des_proceso?:string;
+    id_proceso?:number;
+    ruc_empresa:string;
 }

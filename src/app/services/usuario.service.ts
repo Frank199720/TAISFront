@@ -10,7 +10,10 @@ export class UsuarioService {
   private route = environment.rutaApi;
   constructor(private httpClient:HttpClient) { }
   public insertUsuario(usuario:Usuario){
-    return this.httpClient.post(this.route,usuario);
+    return this.httpClient.post(this.route+'/usuario',usuario);
+  }
+  public getRoles(){
+    return this.httpClient.get(this.route+'/roles');
   }
   public updateUsuario(usuario:Usuario,userId:number){
     return this.httpClient.put(this.route,usuario)
