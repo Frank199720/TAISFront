@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ButtonRendererComponent } from 'src/app/rendered/button-renderer.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tablero',
@@ -10,7 +11,8 @@ export class TableroComponent implements OnInit {
   isEdit:boolean=false;
   frameworkComponents: any;
   addorEdit:boolean = false;
-  
+  @ViewChild("contenido") myModalTablero: ElementRef;
+ 
   rowDataClicked1 = {};
   rowData:any;
   columnDefs = [
@@ -40,20 +42,21 @@ export class TableroComponent implements OnInit {
     },
   ];
   
-  constructor() {
+  constructor(private modal:NgbModal) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
       
     };
    }
-
+  
   ngOnInit(): void {
+    
   }
   receptTablero(){
 
   }
   agregarTablero(){
-
+    this.modal.open(this.myModalTablero,{ size: 'xl' ,backdrop:false });
   }
   generarVista(){
 

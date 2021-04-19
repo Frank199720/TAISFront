@@ -8,4 +8,5 @@ export interface Indicador {
     preg_dos:string;
     preg_tres:string;
     preg_uno:string;
+    id_proceso?:number;
 }

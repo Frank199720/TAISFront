@@ -1,1 +1,152 @@
-<p>modal-tablero works!</p>
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Mantenedor Tablero</h5>
+  </div>
+  <div class="modal-body">
+    <mat-card-content>
+      <form [formGroup]="formTablero">
+        <mat-form-field class="example-full-width col-12">
+          <mat-label>Indicador</mat-label>
+          <select
+            formControlName="indicador"
+            [(ngModel)]="tablero.id_indicador"
+            matNativeControl
+          >
+            <option
+              [value]="item.id_indicador"
+              *ngFor="let item of listaIndicador"
+            >
+              {{ item.nom_indicador }}
+            </option>
+          </select>
+          <mat-error *ngIf="indicador.hasError('required')"
+            >Seleccione el indicadorr</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-8">
+          <mat-label>Nombre del responsable</mat-label>
+          <input
+            matInput
+            formControlName="nombre"
+            [(ngModel)]="tablero.nom_responsable"
+          />
+          <mat-error *ngIf="nombre.hasError('required')"
+            >Ingrese el nombre del responsable</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-4">
+          <mat-label>Cargo</mat-label>
+          <input
+            matInput
+            formControlName="responsable"
+            [(ngModel)]="tablero.responsable"
+          />
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-12">
+          <mat-label>Meta</mat-label>
+          <input
+            matInput
+            formControlName="meta"
+            [(ngModel)]="tablero.objetivo"
+          />
+          <mat-error *ngIf="meta.hasError('required')"
+            >Ingrese la meta</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-12">
+          <mat-label>Objetivo</mat-label>
+          <input
+            matInput
+            formControlName="objetivo"
+            [(ngModel)]="tablero.objetivo"
+          />
+          <mat-error *ngIf="objetivo.hasError('required')"
+            >Ingrese el objetivo</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-4">
+          <mat-label>Semáforo rojo</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="rojo"
+            [(ngModel)]="tablero.sem_rojo"
+          />
+          <mat-error *ngIf="rojo.hasError('required')"
+            >Ingrese el semáforo en rojo</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-4">
+          <mat-label>Semáforo ambar</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="ambar"
+            [(ngModel)]="tablero.sem_ambar"
+          />
+          <mat-error *ngIf="ambar.hasError('required')"
+            >Ingrese el semáforo en ambar</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-4">
+          <mat-label>Semáforo verde</mat-label>
+          <input
+            matInput
+            formControlName="verde"
+            [(ngModel)]="tablero.sem_verde"
+          />
+          <mat-error *ngIf="verde.hasError('required')"
+            >Ingrese el semáforo en verde</mat-error
+          >
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </div>
+  <div class="row">
+    <div class="col">
+        <mat-form-field class="example-full-width col-6 ml-auto">
+            <mat-label>Ingrese iniciativa</mat-label>
+            <input
+            matInput
+            
+            [(ngModel)]="iniciativa.des_iniciativa"
+          />
+          </mat-form-field>
+    
+          <button
+            mat-raised-button
+            color="primary"
+            style="height: 50px;"
+            (click)="agregarIniciativa();"
+          >
+            Agregar Iniciativa
+          </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col" [ngClass]="">
+        <ag-grid-angular
+          style="width: 100%; height: 500px"
+          class="ag-theme-alpine"
+          [rowData]="rowData"
+          [columnDefs]="columnDefs"
+          [frameworkComponents]="frameworkComponents"
+        >
+        </ag-grid-angular>
+      </div>
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+      Cancelar
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="sendTablero()"
+      ngbAutofocus
+    >
+      Guardar
+    </button>
+  </div>
+</div>

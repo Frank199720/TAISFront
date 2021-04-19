@@ -11,25 +11,16 @@ import { SubprocesoService } from '../../../../../services/subproceso.service';
   styleUrls: ['./modal-indicador.component.scss']
 })
 export class ModalIndicadorComponent implements OnInit {
-  @Input() idproceso:number;
+  @Input() indicador:Indicador;
   @Output() indicadorOut: EventEmitter<Indicador>=new EventEmitter();
   listaSubProceso:Subproceso[];
   public  formIndicador : FormGroup;
-  indicador:Indicador={
-    id_subproceso:null,
-    preg_cinco:null,
-    preg_uno:null,
-    preg_cuatro:null,
-    preg_dos:null,
-    preg_tres:null,
-    formula:null,
-    nom_indicador:null
-  }
+  
   constructor(private SubprocesoService:SubprocesoService) { }
 
   ngOnInit(): void {
     this.formIndicador=this.createFormGroup();
-    this.SubprocesoService.getSubProcesos(this.idproceso).subscribe((data:Subproceso[])=>{
+    this.SubprocesoService.getSubProcesos(this.indicador.id_proceso).subscribe((data:Subproceso[])=>{
       this.listaSubProceso=data;
     })
   }

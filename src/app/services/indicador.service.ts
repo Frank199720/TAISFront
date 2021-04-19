@@ -10,9 +10,15 @@ export class IndicadorService {
   private ruta=environment.rutaApi;
   constructor(private httpClient:HttpClient) { }
   public getIndicadores(ruc:string){
-    return this.httpClient.get(this.ruta+'');
+    return this.httpClient.get(this.ruta+'/IndicadorEmpresa/'+ruc);
+  }
+  public getIndicadorByID(idIndicador:number){
+    return this.httpClient.get(this.ruta+'/indicador/'+idIndicador);
   }
   public insertIndicador(indicador:Indicador){
     return this.httpClient.post(this.ruta+'/indicador',indicador);
+  }
+  public updateIndicador(indicador:Indicador){
+    return this.httpClient.put(this.ruta+'/indicador/'+indicador.id_indicador,indicador);
   }
 }
