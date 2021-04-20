@@ -33,10 +33,19 @@ export class LoginComponent implements OnInit {
       if(res.success){
         localStorage.setItem('token',res.token);
         localStorage.setItem('infoUser',JSON.stringify(res.user));
-        this.router.navigateByUrl('admin');
+        if(res.user.id_rol==1){
+          this.router.navigateByUrl('admin');
+        }else{
+          this.router.navigateByUrl('starter');
+        }
+        
       }else{
         showError('Error',res.message);
       }
+    },
+    (err)=>{
+      console.log(err);
+      showError('Error',err.error.message);
     })
     //this.router.navigateByUrl('starter');
   }

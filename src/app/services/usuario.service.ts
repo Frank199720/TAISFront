@@ -16,7 +16,7 @@ export class UsuarioService {
     return this.httpClient.get(this.route+'/roles');
   }
   public updateUsuario(usuario:Usuario,userId:number){
-    return this.httpClient.put(this.route,usuario)
+    return this.httpClient.put(this.route+'/usuario/'+usuario.id,usuario)
   }
   public inactiveUser(idUser:number){
     return this.httpClient.delete(this.route+'/usuario/'+idUser);
@@ -30,5 +30,12 @@ export class UsuarioService {
   }
   public resetPassword(idUser:number){
     return this.httpClient.get(this.route+idUser)
+  }
+  public actualizarData(user:Usuario){
+    return this.httpClient.put(this.route+'/usuario/'+user.id,user);
+  }
+  public changePassword(userUpdate){
+    let info=JSON.parse(localStorage.getItem('infoUser'));
+    return this.httpClient.put(this.route+'/passwordUpdate/'+info.id+'/'+userUpdate.anterior,userUpdate);
   }
 }

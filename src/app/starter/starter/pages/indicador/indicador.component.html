@@ -27,7 +27,7 @@
       <mat-form-field class="example-full-width col-6 ml-auto">
         <mat-label>Seleccione un proceso</mat-label>
         <select matNativeControl [(ngModel)]="idProceso">
-          <option [value]="item.id_proceso" *ngFor="let item of listaProceso">{{item.des_proceso}}</option>
+          <option [value]="item.id_proceso" *ngFor="let item of listaProceso">{{item.nom_proceso}}</option>
           
         </select>
       </mat-form-field>
@@ -41,16 +41,8 @@
         Agregar indicador
       </button>
     </div>
-    <div class="row">
-      <div class="col">
-        <mat-form-field class="example-full-width col-6">
-          <mat-label>Buscar</mat-label>
-          <input matInput placeholder="Ingrese su búsqueda" />
-          <mat-icon matSuffix>mode_edit</mat-icon>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row"></div>
+    
+  
     <div class="row">
       <div class="col" [ngClass]="">
         <ag-grid-angular

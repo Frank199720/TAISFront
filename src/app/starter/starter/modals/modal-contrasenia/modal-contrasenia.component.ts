@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { showConfirm, showError } from 'src/app/functions/alerts';
+import { UsuarioService } from '../../../../services/usuario.service';
 
 
 @Component({
@@ -8,15 +10,15 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
   styleUrls: ["./modal-contrasenia.component.scss"],
 })
 export class ModalContraseniaComponent implements OnInit {
-  @Output() empresaout: EventEmitter<any> = new EventEmitter();
+  
   public formUpdate: FormGroup;
   update = {
+    password: null,
     anterior: null,
-    nueva: null,
   };
   hide=true;
   hide2=true;
-  constructor() {
+  constructor(private UsuarioService:UsuarioService) {
     this.formUpdate=this.createFormGroup();
   }
   createFormGroup() {
@@ -34,6 +36,17 @@ export class ModalContraseniaComponent implements OnInit {
   }
   get nueva() {
     return this.formUpdate.get("nueva");
+  }
+  actualizarPassword(){
+    this.UsuarioService.changePassword(this.update).subscribe((data:any)=>{
+      console.log('hola');
+      if(data.success){
+        showConfirm('Exito',data.message);
+      }
+    },
+    (err)=>{
+      showError('Error',err.error.message);
+    })
   }
   ngOnInit(): void {}
 }

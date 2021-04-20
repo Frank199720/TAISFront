@@ -75,14 +75,14 @@ export class VistaTableroComponent implements OnInit, AfterViewInit {
     this.cx.beginPath();
     this.cx.font = "20px arial";
     this.cx.fillText("OBJETIVO", 62, 240, 100);
-    this.cx.fillText(this.tablero.objetivo,62,300,100);
+    this.cx.fillText(this.tablero.objetivo,15,300,200);
     
     //this.cx.arrow(130,300, 200, 300, [0, 1, -10, 1, -10, 5]);
     this.cx.fill();
 
     this.cx.strokeRect(318, 250, 270, 150);
     this.cx.fillText("INDICADOR", 400, 270, 100);
-    this.cx.fillText(this.tablero.nom_indicador,400,320,100);
+    this.cx.fillText(this.tablero.nom_indicador,318,320,250);
     console.log(this.tablero);
     this.cx.beginPath();
     //this.cx.arrow(370,300, 440, 300, [0, 1, -10, 1, -10, 5]);
@@ -119,7 +119,7 @@ export class VistaTableroComponent implements OnInit, AfterViewInit {
     var medida=40;
     this.iniciativa.forEach((element:Iniciativa)=>{
       
-      this.cx.fillText("*"+element.des_iniciativa, 410, 520+medida, 100);
+      this.cx.fillText("*"+element.des_iniciativa, 400, 520+medida, 410);
       medida+=40;
     })
     this.cx.beginPath();

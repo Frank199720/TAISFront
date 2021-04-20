@@ -41,7 +41,7 @@ export class UsuarioComponent implements OnInit {
     { field: "usu_apellidop", headerName: "A. Paterno" },
     { field: "usu_apellidom", headerName: "A. Materno" },
     { field: "username", headerName: "Usuario" },
-    { field: "fecha_creacion", headerName: "Fecha de Registro" },
+    { field: "rol_descripcion", headerName: "Rol" },
     { field: 'id',headerName:'id',hide:true},
     {
       field: "usu_estado",
@@ -76,16 +76,7 @@ export class UsuarioComponent implements OnInit {
       },
       width:'70px'
     },
-    {
-      
-      cellRenderer: "buttonRenderer",
-      cellRendererParams: {
-        onClick: this.activeUser.bind(this),
-        class: "btn btn-success btn-sm",
-        icon:"far fa-arrow-alt-circle-up"
-      },
-      width:'70px'
-    },
+    
   ];
  
   rowData :any
@@ -164,10 +155,11 @@ export class UsuarioComponent implements OnInit {
   }
   receptUser(user:Usuario){
     console.log(user);
-    this.modal.dismissAll();
+    
     if(this.isEdit){
       this.usuarioService.updateUsuario(user,user.id).subscribe((data:any)=>{
         if(data.success){
+          this.getUsers();
           showConfirm('Exito!',data.message);
         }else{
           showError('Error',data.message);
@@ -176,6 +168,8 @@ export class UsuarioComponent implements OnInit {
     }else{
       this.usuarioService.insertUsuario(user).subscribe((data:any)=>{
         if(data.success){
+          this.modal.dismissAll();
+          this.getUsers();
           showConfirm('Exito!',data.message);
         }else{
           showError('Error',data.message);

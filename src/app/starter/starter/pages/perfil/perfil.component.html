@@ -53,7 +53,7 @@
               <mat-label>APELLIDO PATERNO</mat-label>
               <input
                 matInput
-                formControlName="apellidos"
+                formControlName="apellidom"
                 readonly
                 [(ngModel)]="usuario.usu_apellidop"
               />
@@ -62,7 +62,7 @@
               <mat-label>APELLIDO MATERNO</mat-label>
               <input
                 matInput
-                formControlName="apellidos"
+                formControlName="apellidop"
                 readonly
                 [(ngModel)]="usuario.usu_apellidom"
               />
@@ -90,7 +90,7 @@
             <div class="row m-0 justify-content-center">
               <div class="col-5">
                 <button class="btn btn-outline-danger m-1" (click)="isEdit=false">Cancelar</button>
-                <button class="btn btn-outline-primary m-1">
+                <button class="btn btn-outline-primary m-1" (click)="actualizarData()">
                   Actualizar Datos
                 </button>
                 <button class="btn btn-outline-success m-1" (click)="changePassword()">

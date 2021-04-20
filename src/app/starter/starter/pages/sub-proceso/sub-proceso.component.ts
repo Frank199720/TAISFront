@@ -34,7 +34,7 @@ export class SubProcesoComponent implements OnInit {
   isEdit:boolean=false;
   columnDefs = [
     { field: "nom_subproceso", headerName: "Nombre",editable:true },
-    { field: "des_subproceso", headerName: "Descripcion" ,editable:true },
+    { field: "des_subproceso", headerName: "Descripcion" ,editable:true ,resizable:true},
     { field: "id_subproceso", hide: true },
     
     {
@@ -76,6 +76,9 @@ export class SubProcesoComponent implements OnInit {
   }
   agregarProceso() {
     this.isEdit=false;
+    this.subProceso.nom_subproceso=null;
+    this.subProceso.des_subproceso=null;
+    
   }
   editProceso(e) {
     this.isEdit=true;

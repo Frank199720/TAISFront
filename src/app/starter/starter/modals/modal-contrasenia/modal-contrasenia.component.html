@@ -13,7 +13,7 @@
           </mat-form-field>
           <mat-form-field class="example-full-width col-12">
             <mat-label>Ingrese nueva contraseña</mat-label>
-            <input matInput [type]="hide2 ? 'password' : 'text'"  formControlName="nueva" [(ngModel)]="update.nueva">
+            <input matInput [type]="hide2 ? 'password' : 'text'"  formControlName="nueva" [(ngModel)]="update.password">
             <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
               <mat-error *ngIf="nueva.hasError('required')">Ingrese la nueva contraseña</mat-error>
           </mat-form-field>
@@ -27,7 +27,7 @@
       <button type="button" class="btn btn-secondary" data-dismiss="modal">
         Cancelar
       </button>
-      <button type="button" class="btn btn-primary">
+      <button type="button" class="btn btn-primary" (click)="actualizarPassword()">
         Guardar
       </button>
     </div>

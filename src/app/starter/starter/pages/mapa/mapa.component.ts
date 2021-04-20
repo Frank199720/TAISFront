@@ -33,25 +33,7 @@ export class MapaComponent implements OnInit {
     { field: "nom_subproceso", headerName: "Sub proceso" },
 
     
-    {
-      cellRenderer: "buttonRenderer",
-      cellRendererParams: {
-        onClick: this.construirMapa.bind(this),
-        class: "btn btn-warning btn-sm",
-        label: "",
-        icon: "fas fa-eye",
-      },
-      width:'70px'
-    },
-    {
-      cellRenderer: "buttonRenderer",
-      cellRendererParams: {
-        onClick: this.deleteMapa.bind(this),
-        class: "btn btn-outline-danger btn-sm",
-        icon: "far fa-trash-alt",
-      },
-      width: "70px",
-    },
+    
     {
       cellRenderer: "buttonRenderer",
       cellRendererParams: {
