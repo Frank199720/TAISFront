@@ -45,8 +45,8 @@ export class ProcesoComponent implements OnInit {
   @ViewChild("contenido") myModalSubProceso: ElementRef;
   rowDataClicked1:Proceso;
   columnDefs = [
-    { field: "nom_proceso", headerName: "Nombre",editable:true },
-    { field: "des_proceso", headerName: "Descripcion" ,editable:true },
+    { field: "nom_proceso", headerName: "Nombre",resizable:true },
+    { field: "des_proceso", headerName: "Descripcion" , resizable:true},
     { field: "id_proceso", headerName: "Estado",hide:true },
     
     {
@@ -72,6 +72,10 @@ export class ProcesoComponent implements OnInit {
   rowData :any
   agregarProceso() {
     this.isEdit=false;
+    this.proceso.des_proceso=null;
+    
+    this.proceso.id_proceso=null;
+    this.proceso.nom_proceso=null;
   }
   guardarProceso(){
     if(this.isEdit){
