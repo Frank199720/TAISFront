@@ -8,6 +8,7 @@ import { PerfilComponent } from './starter/pages/perfil/perfil.component';
 import { IndicadorComponent } from './starter/pages/indicador/indicador.component';
 import { TableroComponent } from './starter/pages/tablero/tablero.component';
 import { VistaTableroComponent } from './starter/pages/tablero/vista-tablero/vista-tablero.component';
+import { MapaComponent } from './starter/pages/mapa/mapa.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path:'tablero/view/:id',
         component:VistaTableroComponent
+      },
+      {
+        path:'mapa',
+        component:MapaComponent
       }
 
     ]

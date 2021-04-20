@@ -1,0 +1,53 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Registro Perspectivas</h5>
+    </div>
+    <div class="modal-body">
+      <mat-card-content>
+        <form [formGroup]="formPerspectiva">
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>Descripción</mat-label>
+            <input
+              matInput
+              formControlName="descripcion"
+              [(ngModel)]="perspectiva.nom_perspectiva"
+              
+            />
+            <mat-error *ngIf="descripcion.hasError('required')">Ingrese Descripcion</mat-error>
+          </mat-form-field>
+          
+        </form>
+      </mat-card-content>
+      <div class="row">
+        <div class="col d-flex">
+          <button class="btn btn-outline-primary ml-auto" (click)="addPerspectiva()">Agregar</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col" [ngClass]="">
+            <ag-grid-angular
+              style="width: 100%; height: 500px"
+              class="ag-theme-alpine"
+              [rowData]="rowData"
+              [columnDefs]="columnDefs"
+              [frameworkComponents]="frameworkComponents"
+            >
+            </ag-grid-angular>
+          </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Cancelar
+      </button>
+      <button
+        ngbAutofocus
+        type="button"
+        class="btn btn-primary"
+        (click)="guardarPerspectiva()"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+  

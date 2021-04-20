@@ -24,6 +24,9 @@ import { ModalIndicadorComponent } from './starter/pages/indicador/modal-indicad
 import { TableroComponent } from './starter/pages/tablero/tablero.component';
 import { ModalTableroComponent } from './starter/pages/tablero/modal-tablero/modal-tablero.component';
 import { VistaTableroComponent } from './starter/pages/tablero/vista-tablero/vista-tablero.component';
+import { MapaComponent } from './starter/pages/mapa/mapa.component';
+import { PerspectivaModalComponent } from './starter/pages/mapa/perspectiva-modal/perspectiva-modal.component';
+import { ObjetivoModalComponent } from './starter/pages/mapa/objetivo-modal/objetivo-modal.component';
 
 
 @NgModule({
@@ -43,6 +46,9 @@ import { VistaTableroComponent } from './starter/pages/tablero/vista-tablero/vis
     TableroComponent,
     ModalTableroComponent,
     VistaTableroComponent,
+    MapaComponent,
+    PerspectivaModalComponent,
+    ObjetivoModalComponent,
    
   ],
   imports: [
