@@ -16,6 +16,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MapaComponent implements OnInit {
   @ViewChild("modalPerspectiva") myModalPerspectiva: ElementRef;
+  @ViewChild("modalObjetivo") myModalObjetivo: ElementRef;
   frameworkComponents: any;
   rowData: any;
   idProceso: number;
@@ -64,8 +65,8 @@ export class MapaComponent implements OnInit {
     {
       cellRenderer: "buttonRenderer",
       cellRendererParams: {
-        onClick: this.deleteMapa.bind(this),
-        class: "btn btn-outline-warning btn-sm",
+        onClick: this.getObjetivos.bind(this),
+        class: "btn btn-outline-primary btn-sm",
         icon: "",
         label:'Objetivos'
       },
@@ -116,5 +117,9 @@ export class MapaComponent implements OnInit {
   getPerspectiva(e){
     this.idMapa= e.rowData.id_mapa;
     this.modal.open(this.myModalPerspectiva,{size:'lg'});
+  }
+  getObjetivos(e){
+    this.idMapa= e.rowData.id_mapa;
+    this.modal.open(this.myModalObjetivo,{size:'lg'});
   }
 }

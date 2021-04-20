@@ -1,1 +1,65 @@
-<p>objetivo-modal works!</p>
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Registro Objetivos</h5>
+    </div>
+    <div class="modal-body">
+      <mat-card-content>
+        <form [formGroup]="formObjetivo">
+            <mat-form-field class="example-full-width col-12">
+                <mat-label>Seleccione perspectiva</mat-label>
+                <select
+                  matNativeControl
+                  formControlName="perspectiva"
+                  [(ngModel)]="objetivo.id_perspectiva"
+                  (change)="actualizarData()"
+                >
+                <option *ngFor="let item of listaPerspectiva" [value]="item.id_perspectiva">{{item.nom_perspectiva}}</option>
+                </select>
+                <mat-error *ngIf="descripcion.hasError('required')">Ingrese Descripcion</mat-error>
+              </mat-form-field>
+          <mat-form-field class="example-full-width col-12">
+            <mat-label>Descripción</mat-label>
+            <input
+              matInput
+              formControlName="descripcion"
+              [(ngModel)]="objetivo.nom_objetivo"
+              
+            />
+            <mat-error *ngIf="descripcion.hasError('required')">Ingrese Descripcion</mat-error>
+          </mat-form-field>
+          
+        </form>
+      </mat-card-content>
+      <div class="row">
+        <div class="col d-flex">
+          <button class="btn btn-outline-primary ml-auto" (click)="guardarObjetivo()">Agregar</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col" [ngClass]="">
+            <ag-grid-angular
+              style="width: 100%; height: 500px"
+              class="ag-theme-alpine"
+              [rowData]="rowData"
+              [columnDefs]="columnDefs"
+              [frameworkComponents]="frameworkComponents"
+            >
+            </ag-grid-angular>
+          </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Cancelar
+      </button>
+      <button
+        ngbAutofocus
+        type="button"
+        class="btn btn-primary"
+        (click)="guardarObjetivo()"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+  
