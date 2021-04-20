@@ -23,6 +23,7 @@ import { IndicadorComponent } from './starter/pages/indicador/indicador.componen
 import { ModalIndicadorComponent } from './starter/pages/indicador/modal-indicador/modal-indicador.component';
 import { TableroComponent } from './starter/pages/tablero/tablero.component';
 import { ModalTableroComponent } from './starter/pages/tablero/modal-tablero/modal-tablero.component';
+import { VistaTableroComponent } from './starter/pages/tablero/vista-tablero/vista-tablero.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ModalTableroComponent } from './starter/pages/tablero/modal-tablero/mod
     ModalIndicadorComponent,
     TableroComponent,
     ModalTableroComponent,
+    VistaTableroComponent,
    
   ],
   imports: [

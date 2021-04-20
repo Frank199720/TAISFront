@@ -10,4 +10,6 @@ export interface Tablero {
     sem_verde:string;
     tab_meta:string;
     continue?:boolean;
+    nom_indicador?:string;
+    resposable?:string;
 }

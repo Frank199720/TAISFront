@@ -109,7 +109,7 @@ export class EmpresaComponent implements OnInit {
     }else{
       this.isEdit=true;
       this.EmpresaService.getEmpresaByID(ruc_empresa).subscribe((data:Company)=>{
-        this.empresa=data[0];
+        this.empresa=data;
         
         this.modal.open(this.myModal,{size:'lg'});
       })

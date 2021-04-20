@@ -21,6 +21,9 @@ export class TableroService {
   public getTableroById(idTablero:string){
     return this.httpClient.get(this.ruta+'/tablero/'+idTablero);
   }
+  public getTableroById2(idTablero:string){
+    return this.httpClient.get(this.ruta+'/GetTabxID/'+idTablero);
+  }
   public insertIniciativa(iniciativa:Iniciativa){
     return this.httpClient.post(this.ruta+'/iniciativa',iniciativa);
   }

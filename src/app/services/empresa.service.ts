@@ -20,7 +20,7 @@ export class EmpresaService {
   }
   public getEmpresaByID(idEmpresa:string){
   
-    return this.httpClient.get(this.route+'/empresa?id='+idEmpresa);
+    return this.httpClient.get(this.route+'/empresa/'+idEmpresa);
   }
   public updateEmpresa(empresa:Company,idEmpresa:string){
     return this.httpClient.put(this.route+'/empresa/'+idEmpresa,empresa);
